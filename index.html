@@ -14,9 +14,433 @@
     <meta property="og:site_name" content="VSTAD Platform" />
     <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./src/output.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        border: "hsl(var(--border))",
+                        input: "hsl(var(--input))",
+                        ring: "hsl(var(--ring))",
+                        background: "hsl(var(--background))",
+                        foreground: "hsl(var(--foreground))",
+                    }
+                }
+            }
+        }
+    </script>
+     <style>
+        /* Smooth transition for theme toggle */
+        body, header, div, span, button, input {
+            transition-property: background-color, border-color, color, fill, stroke;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms;
+        }
+    
+    </style>
 </head>
-<body>
-    <p class="text-acent-color">Hello</p>
-    <p class="font-khmer">ហេ</p>
+<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 w-full border-b border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-gray-950/80 backdrop-blur-md supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-gray-950/60">
+        <div class="container mx-auto px-4 md:px-6 h-16 flex items-center justify-between gap-4">
+            
+            <!-- Left: Logo -->
+            <a href="#" class="flex items-center gap-2 flex-shrink-0">
+                <!-- Logo Icon -->
+                <div class="relative w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-blue-800 overflow-hidden shrink-0">
+                        <img src="../asset/logo copy.png" alt="">
+                </div>
+                <!-- Logo Text -->
+                <span class="text-xl font-bold tracking-tight text-gray-900 dark:text-white hidden sm:block">VSTAD</span>
+            </a>
+
+            <!-- Center: Search Bar (Hidden on mobile, distinct on desktop) -->
+            <div class="hidden md:flex flex-1 max-w-md mx-4">
+                <div class="relative w-full">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                    </div>
+                    <input 
+                        type="search" 
+                        placeholder="Search" 
+                        class="w-full h-10 pl-10 pr-4 rounded-full bg-gray-100 dark:bg-gray-800 border-transparent focus:bg-white dark:focus:bg-gray-900 border focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 text-sm transition-all"
+                    >
+                </div>
+            </div>
+
+            <!-- Right: Navigation & Actions -->
+            <div class="flex items-center gap-2 md:gap-6">
+                <!-- Nav Links (Desktop) -->
+                <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+                    <a href="./pages/home.html" class="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors">Home</a>
+                    <a href="./pages/playlist.html" class="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors">Explore</a>
+                </nav>
+
+                <!-- Mobile Search Toggle -->
+                <button class="md:hidden p-2 text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800 rounded-full transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                    <span class="sr-only">Search</span>
+                </button>
+
+                <!-- Theme Toggle -->
+                <button 
+                    id="theme-toggle"
+                    class="p-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700"
+                    aria-label="Toggle Dark Mode"
+                >
+                    <!-- Sun Icon (Show in Dark Mode) -->
+                    <svg id="sun-icon" class="w-5 h-5 hidden dark:block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+                    
+                    <!-- Moon Icon (Show in Light Mode) -->
+                    <svg id="moon-icon" class="w-5 h-5 block dark:hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+                </button>
+
+                <!-- Sign In Button -->
+                <a href="sign_in.html" class="inline-flex items-center justify-center h-9 px-4 py-2 text-sm font-medium text-red-600 dark:text-red-400 bg-white dark:bg-transparent border border-red-500/50 dark:border-red-500 hover:bg-red-50 dark:hover:bg-red-950/30 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-red-500/20 shadow-sm">
+                    Sign in
+                </a>
+            </div>
+        </div>
+    </header>
+
+      <section class="px-4 sm:px-6 lg:px-12 py-16">
+        <div class="max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center gap-10">
+
+            <!-- Text Section -->
+            <div class="w-full md:w-1/2 text-center md:text-left">
+                <h1 class="text-1xl dark:text-white sm:text-5xl lg:text-6xl font-extrabold text-primary-color leading-tight mb-6">
+                    Discover, Watch, and Share
+                    <span class="text-secondary-color">Amazing Videos</span> from 
+                    <br>ISTAD
+                </h1>
+
+                <p class="text-lg sm:text-xl text-acent-color mb-10">
+                    Join our community to discover the story of ISTAD.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                    <button class="px-8 py-4 bg-blue-600 hover:bg-primary-color text-lg text-white font-semibold rounded-full transition-all transform hover:scale-105 duration-200">
+                        Get Started
+                    </button>
+
+                    <button class="px-8 py-4  text-secondary-color font-semibold text-lg rounded-full border-2 border-secondary-color transition-all hover:bg-white/10 transition-all transform hover:scale-105 duration-200">
+                        Learn More
+                    </button>
+                </div>
+            </div>
+
+            <!-- Image Section -->
+            <div class="w-full md:w-1/2 flex justify-center">
+                <img 
+                  src="./asset/herosectionimage.png" 
+                  alt="Hero Light" 
+                  class="w-full h-full object-cover object-center block dark:hidden"
+              />
+
+              <!-- Dark mode image -->
+              <img 
+                  src="./asset/herosection-dark.png" 
+                  alt="Hero Dark" 
+                  class="w-full h-full object-cover object-center hidden dark:block"
+              />
+              </div>
+            
+        </div>
+    </section>
+
+
+      <!-- Features Section -->
+      <section class="py-20 px-4 sm:px-6 lg:px-8">
+          <div class="max-w-7xl mx-auto">
+              <h2 class="text-3xl sm:text-4xl font-bold text-center text-gray-900 dark:text-white mb-16">
+                  Why Choose VSTAD?
+              </h2>
+              <div class="grid md:grid-cols-3 gap-8">
+                  <!-- Feature 1 -->
+                  <div class="text-center p-6 rounded-xl border-2 bg-background-hover  dark:bg-gray-800 border-gray-200 dark:border-gray-600 dark:border-gray-700 transform hover:-translate-y-2 transition-all duration-200">
+                      <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                          <svg class="w-8 h-8 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                          </svg>
+                      </div>
+                      <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Watch Trending Videos Instantly</h3>
+                      <p class="text-gray-600 dark:text-gray-400">Stay up-to-date with the latest viral content and trending topics</p>
+                  </div>
+                  
+                  <!-- Feature 2 -->
+                  <div class="text-center p-6 rounded-xl border-2 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-600 dark:border-gray-700 transform hover:-translate-y-2 transition-all duration-200 ">
+                      <div class="w-16 h-16 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                          <svg class="w-8 h-8 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                          </svg>
+                      </div>
+                      <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Like, Share, and Comment</h3>
+                      <p class="text-gray-600 dark:text-gray-400">Engage with your favorite content and connect with creators</p>
+                  </div>
+                  
+                  <!-- Feature 3 -->
+                  <div class="text-center p-6 rounded-xl border-2 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-600 dark:border-gray-700 transform hover:-translate-y-2 transition-all duration-200">
+                      <div class="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                          <svg class="w-8 h-8 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                          </svg>
+                      </div>
+                      <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Keeping up with Our commnunity</h3>
+                      <p class="text-gray-600 dark:text-gray-400">Never miss content from your favorite video makers</p>
+                  </div>
+              </div>
+          </div>
+      </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8  bg-white dark:bg-gray-900">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl sm:text-4xl font-bold text-center  text-gray-900 dark:text-white mb-16">
+                What Our Users Say
+            </h2>
+            <div class="grid md:grid-cols-3 gap-8 max-w-3xl mx-auto">
+                <!-- Testimonial 1 -->
+                <div class="bg-white border-2 border-gray-200 dark:border-gray-600 dark:bg-gray-900 p-8 rounded-2xl transition-all duration-300 hover:-translate-y-2">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                            T
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-semibold text-gray-900 dark:text-white">Thida So</h4>
+                            <div class="flex text-yellow-400">
+                                ★★★★★
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 italic">"I found amazing tutorials here every day! The community is so supportive and the content quality is outstanding."</p>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-600 p-8 rounded-2xl transition-all duration-300 hover:-translate-y-2">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                            V
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-semibold text-gray-900 dark:text-white">Vanny Dy</h4>
+                            <div class="flex text-yellow-400">
+                                ★★★★★
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 italic">"The community is so interactive and fun! I've made so many friends and discovered content I never knew I needed."</p>
+                </div>
+                <!-- Testimonial 2 -->
+                <div class="bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-600 p-8 rounded-2xl transition-all duration-300 hover:-translate-y-2">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                            N
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-semibold text-gray-900 dark:text-white">Nareaksa Tim</h4>
+                            <div class="flex text-yellow-400">
+                                ★★★★★
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 italic">"The community is so interactive and fun! I've made so many friends and discovered content I never knew I needed."</p>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+    <!-- HOW IT WORKS SECTION -->
+        <section class="mb-16 py-12">
+            <div class="max-w-6xl mx-auto">
+                <!-- Section Header -->
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">How VSTAD Works</h2>
+                    <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                        Your journey with ISTAD starts here. Follow these simple steps to explore and engage with our community.
+                    </p>
+                </div>
+
+                <!-- Process Steps Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 grid-container">
+                    
+                    <!-- Step 1: Sign Up -->
+                    <div class="card process-card bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-600 transform hover:-translate-y-2 transition-all duration-200">
+                        <div class="flex flex-col items-center text-center">
+                            <div class="step-number w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mb-4 text-primary-color dark:text-white bg-gray-50 dark:bg-gray-700">
+                                1
+                            </div>
+                            <div class="w-20 h-20 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mb-4">
+                                <svg class="w-10 h-10 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Create Account</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                                Sign up with your email to get started. It's quick, free, and gives you access to all features.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Explore Content -->
+                    <div class="card process-card bg-white dark:bg-gray-800 rounded-2xl p-6  border border-gray-200 dark:border-gray-600 transform hover:-translate-y-2 transition-all duration-200">
+                        <div class="flex flex-col items-center text-center">
+                            <div class="step-number w-16 h-16 rounded-full flex items-center justify-center  text-2xl font-bold mb-4 text-primary-color dark:text-white bg-gray-50 dark:bg-gray-700">
+                                2
+                            </div>
+                            <div class="w-20 h-20 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center mb-4">
+                                <svg class="w-10 h-10 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Browse Playlists</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                                Explore curated playlists organized by topics like News, Travel, Education and more.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Watch Videos -->
+                    <div class="card process-card bg-white dark:bg-gray-800 rounded-2xl p-6  border border-gray-200 dark:border-gray-600 transform hover:-translate-y-2 transition-all duration-200">
+
+                        <div class="flex flex-col items-center text-center">
+                            <div class="step-number w-16 h-16 rounded-full flex items-center justify-center  text-2xl font-bold mb-4 text-primary-color dark:text-white bg-gray-50 dark:bg-gray-700">
+                                3
+                            </div>
+                            <div class="w-20 h-20 bg-pink-100 dark:bg-pink-900/30 rounded-full flex items-center justify-center mb-4">
+                                <svg class="w-10 h-10 text-pink-600 dark:text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Watch & Learn</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                                Click any video to watch in high quality to learn more about our community.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Engage -->
+                    <div class="card process-card bg-white dark:bg-gray-800 rounded-2xl p-6  border border-gray-200 dark:border-gray-600 transform hover:-translate-y-2 transition-all duration-200">
+                    
+                        <div class="flex flex-col items-center text-center">
+                            <div class="step-number w-16 h-16 rounded-full flex items-center justify-center  text-2xl font-bold mb-4 text-primary-color dark:text-white bg-gray-50 dark:bg-gray-700">
+                                4
+                            </div>
+                            <div class="w-20 h-20 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center mb-4">
+                                <svg class="w-10 h-10 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Like & Comment</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                                Interact with content through likes,share and comments. Join the ISTAD community discussion.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Call to Action -->
+                <div class="text-center mt-16">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-white mb-6">
+                        Ready to Join the Community?
+                    </h2>
+                    <a href="./playlist.html" class="inline-flex items-center gap-3 px-8 py-4 bg-primary-color text-white text-lg font-semibold rounded-full hover:from-blue-700 hover:to-primary-color transition-all transform hover:scale-105 duration-200 ">
+                        Start Exploring Now
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+     </main>
+
+
+    <!-- Footer -->
+    <footer class="bg-[#1e3a8a] dark:bg-gray-950 text-white py-10 px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+        
+        <!-- Logo & Description -->
+        <div class="flex flex-col items-center text-center">
+          <div class="w-24 h-24 flex items-center justify-center mb-4 ">
+            <img src="../asset/logo copy.png" alt="" class="w-24 h-24 rounded-full border-2 flex items-center justify-center mb-4 ">
+          </div>
+          <p class="text-sm text-gray-200 leading-relaxed">
+            Empowering learners through innovative education and technology. Providing the latest methodology with high-quality training and mentoring.
+          </p>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h3 class="font-semibold text-lg mb-4 pb-2">Quick Links</h3>
+          <ul class="space-y-2">
+            <li><a href="./home.html" class="text-gray-200 hover:text-yellow-400 transition-colors">Home</a></li>
+            <li><a href="./playlist.html" class="text-gray-200 hover:text-yellow-400 transition-colors">Explore</a></li>
+          </ul>
+        </div>
+
+        <!-- About -->
+        <div>
+          <h3 class="font-semibold text-lg mb-4 pb-2">About</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-200 hover:text-yellow-400 transition-colors">About us</a></li>
+            <li><a href="#" class="text-gray-200 hover:text-yellow-400 transition-colors">Our Teams</a></li>
+            <li><a href="#" class="text-gray-200 hover:text-yellow-400 transition-colors">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact Us -->
+        <div>
+          <h3 class="font-semibold text-lg mb-4  pb-2">Contact Us</h3>
+          <ul class="space-y-2 text-sm text-gray-200">
+            <li>No. 24, Street 562, Sangkat kak I,</li>
+            <li>Khan Toul Kork, Phnom Penh.</li>
+            <li class="pt-2">Tel: +855 717 240 181</li>
+            <li class="pt-2">
+              <a href="mailto:VSATD@gmail.com" class="hover:text-yellow-400 transition-colors">VSATD@gmail.com</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Sponsor and Organize -->
+        <div class="flex flex-col items-center">
+          <h3 class="font-semibold text-md mb-4 pb-2 w-full text-center">Sponsored and Organized by</h3>
+          <div class="flex items-center gap-2 rounded-lg px-4 py-2">
+            <img src="../asset/istad-logo-white.png" alt="ISTAD Logo" class="w-250 h-auto ">
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="mt-10 pt-6 border-t border-white/20 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-sm text-gray-300">
+          © 2025 VSTAD. All rights reserved.
+        </p>
+        
+        <!-- Social Media Icons -->
+        <div class="flex items-center gap-4">
+          <a href="#" class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-yellow-400 hover:text-blue-900 transition-colors">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="#" class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-yellow-400 hover:text-blue-900 transition-colors">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="#" class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-yellow-400 hover:text-blue-900 transition-colors">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm-1 17.5v-11l9 5.5-9 5.5z"/></svg>
+          </a>
+          <a href="#" class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-yellow-400 hover:text-blue-900 transition-colors">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
 </body>
+    <script src="./js/darkmode.js"></script>
+  <script src="./js/index.js"></script>
 </html>
