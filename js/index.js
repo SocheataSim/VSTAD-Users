@@ -13,7 +13,7 @@ async function fetchData() {
 
         const data = await response.json();
 
-        displayVideos(videos);   // <—— THIS IS THE SECOND PLACE
+        displayVideos(data.videos);
 
     } catch (error) {
         console.error(error);
@@ -57,8 +57,8 @@ function displayVideos(videos) {
                     ${video.duration ? (video.duration / 100).toFixed(2) : "0.000"}
                 </span>
                 <!-- Hover overlay -->
-                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 scale-100 group-hover:scale-110 transition-transform duration-300">
-                    <button class="text-white font-bold px-4 py-2 rounded-full bg-secondary-color bg-opacity-50" 
+                <div class="absolute inset-0 flex items-center justify-center scale-100 group-hover:scale-110 transition-transform duration-300">
+                    <button class="text-white font-bold px-4 py-2 rounded-full bg-opacity-50" 
                             onclick="window.location.href='display.html?id=${video.id}'">
                         <i class="fa-solid fa-play"></i> 
                     </button>
@@ -73,7 +73,7 @@ function displayVideos(videos) {
                         ${video.title}
                     </h3>
                     <p class="text-xs text-gray-600 dark:text-gray-400">${video.uploader.username}</p>
-                    <p class="text-xs text-gray-600 dark:text-gray-400">3k views • Published on ${new Date(video.created_at).toLocaleDateString()}</p>
+                    <p class="text-xs text-gray-600 dark:text-gray-400">${video.view_count} views • Published on ${new Date(video.created_at).toLocaleDateString()}</p>
                 </div>
             </div>
         </div>
@@ -143,7 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Set video info
         document.getElementById("videoTitle").textContent = video.title;
         document.getElementById("videoDescription").textContent = `${video.description}`;
-        document.getElementById("videoView").textContent = `3k views • Published on ${new Date(video.created_at).toLocaleDateString()}`;
+        document.getElementById("videoView").textContent = `${video.view_count} • Published on ${new Date(video.created_at).toLocaleDateString()}`;
 
 // ${timeSince(new Date(video.created_at))}
         // Uploader info
@@ -198,7 +198,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             ${video.duration ? video.duration.toFixed(2) : "0.00"}
                         </span>
                         <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 scale-100 group-hover:scale-110 transition-transform duration-300">
-                            <button class="text-white font-bold px-4 py-2 rounded-full bg-secondary-color bg-opacity-50" 
+                            <button class="text-white font-bold px-4 py-2 rounded-full bg-opacity-50" 
                                     onclick="window.location.href='display.html?id=${video.id}'">
                                     <i class="fa-solid fa-play"></i> 
                             </button>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VSTAD Platform</title>
+    <title>VSTAD Platform - Profile</title>
     <meta name="description" content="A video-sharing platform where you can watch, like, comment, and share videos uploaded by our community." />
     <meta name="keywords" content="video platform, VSTAD, watch videos, share platform, creators, like videos, comment" />
     <meta name="author" content="VSTAD Platform" />
@@ -13,10 +13,309 @@
     <meta property="og:image" content="https://i.pinimg.com/736x/5e/77/09/5e7709769cd1d2d23c610653211e443f.jpg" />
     <meta property="og:site_name" content="VSTAD Platform" />
     <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../../src/output.css">
+
 </head>
-<body>
-    <p class="text-acent-color">Hello</p>
-    <p class="font-khmer">ហេ</p>
+<body >
+    <!-- Header Section -->
+    <div class="bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between py-6">
+                <!-- Left side - Profile info -->
+                <div class="flex items-center space-x-6">
+                    <!-- Profile Image -->
+                    <div class="relative">
+                        <img id="profileImage" src="../../pages/images/Lina.jpg" 
+                             alt="Profile" 
+                             class="w-32 h-32 rounded-full object-cover border-4 border-white">
+                    </div>
+                    
+                    <!-- Profile Details -->
+                    <div>
+                        <h1 id="profileName" class="text-3xl font-bold text-gray-900">Lut Lina</h1>
+                        <p id="profileBio" class="text-gray-500 mt-1">Content creator and video enthusiast</p>
+                        <button id="editProfileBtn" class="mt-3 px-4 py-2 bg-red-600 text-white text-sm font-medium rounded-lg hover:bg-red-700 transition-colors">
+                            Edit profile
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Right side - Navigation -->
+                <div class="flex items-center space-x-6">
+                    <!-- Theme Toggle -->
+                    <button class="p-2 hover:bg-gray-100 rounded-full transition-colors">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                    </button>
+                    
+                    <!-- Menu Toggle -->
+                    <div class="relative" id="menuContainer">
+                        <button id="menuButton" class="p-2 hover:bg-gray-100 rounded-full transition-colors">
+                            <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+                        
+                        <!-- Menu Dropdown -->
+                        <div id="menuDropdown" class="hidden absolute right-0 mt-2 bg-white py-3 px-4 rounded-lg shadow-lg">
+                            <div class="text-center space-y-2">
+                                <a href="home.html" class="block px-4 py-2 hover:bg-gray-100 rounded transition-colors">Home</a>
+                                <a href="playlist.html" class="block px-4 py-2 hover:bg-gray-100 rounded transition-colors">Explore</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Profile Menu -->
+                    <div>
+                        <button class="focus:outline-none">
+                            <img id="navProfileImage" src="../../pages/images/Lina.jpg" 
+                                 alt="User" 
+                                 class="w-10 h-10 rounded-full object-cover border-2 border-gray-200">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Gallery Section -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Tabs -->
+         <!-- tap liked -->
+        <div class="flex space-x-8 border-b border-gray-200 mb-8">
+            <button class="pb-4 px-1 text-gray-500 hover:text-gray-900 font-medium flex items-center space-x-2">
+                 <a href="like.html">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"> </path>  
+                </svg>
+                </a>
+                <span>Liked</span>
+            </button>
+
+            <!-- tap share -->
+            <button class="pb-4 px-1 text-gray-500 hover:text-gray-900 font-medium flex items-center space-x-2">
+                <a href="share.html">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>   
+                </svg>
+                
+                </a><span>Share</span>
+                
+            </button>
+
+            <!-- tap favorite    -->
+            <button class="pb-4 px-1 border-b-2 border-gray-900 font-medium text-gray-900  flex items-center space-x-2">
+                <a href="favourite.html">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>   
+                </svg> 
+                       
+                 
+                    </a>  <span>Favorite</span>      
+                
+            </button>
+        </div>
+        
+
+        <!-- Video Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Video Card 1 -->
+            <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+                <div class="relative aspect-video bg-gray-200">
+                    <img src="../images/Interview.jpg" 
+                         alt="Closing Ceremony Day" 
+                         class="w-full h-full object-cover">
+                </div>
+                <div class="p-4">
+                    <div class="flex items-start space-x-3">
+                        <img src="../../pages/images/Vstad.jpg" alt="logo" 
+                         class="w-12 h-12 rounded-full object-cover border-2 border-gray-200"">
+                        
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-gray-900 mb-1">Closing Ceremony Day</h3>
+                            <p class="text-sm text-gray-600">VSTAD</p>
+                            <p class="text-sm text-gray-500">512k views • 10 Days ago</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Card 2 -->
+            <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+                <div class="relative aspect-video bg-gray-200">
+                    <img src="../../pages/images/Interview.jpg" 
+                         alt="Academic seminar" 
+                         class="w-full h-full object-cover">
+                </div>
+                <div class="p-4">
+                    <div class="flex items-start space-x-3">
+                        <img src="../../pages/images/Vstad.jpg" alt="logo" 
+                         class="w-12 h-12 rounded-full object-cover border-2 border-gray-200"">
+                        
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-gray-900 mb-1">Academic seminar</h3>
+                            <p class="text-sm text-gray-600">VSTAD</p>
+                            <p class="text-sm text-gray-500">512k views • 10 Days ago</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Card 3 -->
+            <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+                <div class="relative aspect-video bg-gray-200">
+                    <img src="../../pages/images/Open.png" 
+                         alt="ISTAD Orientation Day" 
+                         class="w-full h-full object-cover">
+                </div>
+                <div class="p-4">
+                    <div class="flex items-start space-x-3">
+                        <img src="../../pages/images/Vstad.jpg" alt="logo" 
+                         class="w-12 h-12 rounded-full object-cover border-2 border-gray-200"">
+                        
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-gray-900 mb-1">ISTAD Orientation Day</h3>
+                            <p class="text-sm text-gray-600">VSTAD</p>
+                            <p class="text-sm text-gray-500">512k views • 10 Days ago</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Card 4 -->
+            <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+                <div class="relative aspect-video bg-gray-200">
+                    <img src="../../pages/images/Interview1.jpg" 
+                         alt="ISTAD Closing Ceremony" 
+                         class="w-full h-full object-cover">
+                </div>
+                <div class="p-4">
+                    <div class="flex items-start space-x-3">
+                       <img src="../../pages/images/Vstad.jpg" alt="logo" 
+                         class="w-12 h-12 rounded-full object-cover border-2 border-gray-200"">
+                        
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-gray-900 mb-1">ISTAD Closing Ceremony</h3>
+                            <p class="text-sm text-gray-600">VSTAD</p>
+                            <p class="text-sm text-gray-500">512k views • 10 Days ago</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Card 5 -->
+            <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+                <div class="relative aspect-video bg-gray-200">
+                    <img src="../../pages/images/Interview.jpg" 
+                         alt="Student Training Session" 
+                         class="w-full h-full object-cover">
+                </div>
+                <div class="p-4">
+                    <div class="flex items-start space-x-3">
+                        <img src="../../pages/images/Vstad.jpg" alt="logo" 
+                         class="w-12 h-12 rounded-full object-cover border-2 border-gray-200"">
+                        
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-gray-900 mb-1">Student Training Session</h3>
+                            <p class="text-sm text-gray-600">VSTAD</p>
+                            <p class="text-sm text-gray-500">512k views • 10 Days ago</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Card 6 -->
+            <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+                <div class="relative aspect-video bg-gray-200">
+                    <img src="../../pages/images/Exam.jpg" 
+                         alt="ISTAD Closing Ceremony" 
+                         class="w-full h-full object-cover">
+                </div>
+                <div class="p-4">
+                    <div class="flex items-start space-x-3">
+                        <img src="../../pages/images/Vstad.jpg" alt="logo" 
+                         class="w-12 h-12 rounded-full object-cover border-2 border-gray-200"">
+                        
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-gray-900 mb-1">ISTAD Closing Ceremony</h3>
+                            <p class="text-sm text-gray-600">VSTAD</p>
+                            <p class="text-sm text-gray-500">512k views • 10 Days ago</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Profile Modal -->
+    <div id="editProfileModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-lg w-full max-w-md shadow-xl animate-fadeIn">
+            <!-- Header -->
+            <div class="flex items-center justify-between p-6 border-b border-gray-200">
+                <h2 class="text-xl font-semibold text-gray-900">Edit Profile</h2>
+                <button id="closeModalBtn" class="text-gray-400 hover:text-gray-600 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Content -->
+            <div class="p-6">
+                <!-- Profile Photo -->
+                <div class="flex flex-col items-center mb-6">
+                    <div class="relative w-24 h-24 mb-4">
+                        <img id="profilePreview" src="https://i.pravatar.cc/150?img=5" alt="Profile" class="w-full h-full rounded-full object-cover border-4 border-gray-200">
+                    </div>
+                    <input type="file" id="photoInput" accept="image/*" class="hidden">
+                    <button id="changePhotoBtn" class="px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors text-sm">
+                        Change Photo
+                    </button>
+                    <p class="text-xs text-gray-500 mt-2">JPG, PNG or GIF (max 2MB)</p>
+                </div>
+
+                <!-- Name Field -->
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        Name <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" id="nameInput" value="Lut Lina" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter your name" />
+                </div>
+
+                <!-- Bio Field -->
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Bio</label>
+                    <textarea id="bioInput" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none" placeholder="Brief description for your profile">Content creator and video enthusiast</textarea>
+                    <p class="text-xs text-gray-500 mt-1">Maximum 150 characters</p>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="flex gap-3 p-6 border-t border-gray-200">
+                <button id="cancelBtn" class="flex-1 px-4 py-2 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors">
+                    Cancel
+                </button>
+                <button id="saveChangesBtn" class="flex-1 px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors">
+                    Save Changes
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Toast -->
+    <div id="successToast" class="hidden fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-slideIn">
+        <div class="flex items-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span>Profile updated successfully!</span>
+        </div>
+    </div>
+
+    <script src="../../js/profile.js">
+        
+    </script>
 </body>
 </html>
