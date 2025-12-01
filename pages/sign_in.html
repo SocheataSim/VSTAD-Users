@@ -268,70 +268,8 @@
             }
         }
     </script>
-    
-    <!-- Firebase SDKs -->
-    <!-- <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyD1SyrYJPKgIM94qopp52sykOsiUJFTcNM",
-            authDomain: "vstad-f3996.firebaseapp.com",
-            projectId: "vstad-f3996",
-            storageBucket: "vstad-f3996.firebasestorage.app",
-            messagingSenderId: "806959755420",
-            appId: "1:806959755420:web:4130398fdaad20d83fbd59",
-            measurementId: "G-E21RY42TVE"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const provider = new GoogleAuthProvider();
-
-        // Google Login Handler
-        window.handleGoogleLogin = async () => {
-            const btn = document.getElementById('googleBtn');
-            const originalContent = btn.innerHTML;
-            
-            try {
-                btn.innerHTML = '<span class="animate-spin">⟳</span> Connecting to Google...';
-                btn.disabled = true;
-                
-                const result = await signInWithPopup(auth, provider);
-                const user = result.user;
-                
-                console.log("User signed in:", user);
-                
-                // Store user info
-                localStorage.setItem('user', JSON.stringify({
-                    name: user.displayName,
-                    email: user.email,
-                    photo: user.photoURL
-                }));
-                
-                // Store access token (you can send this to your backend)
-                const idToken = await user.getIdToken();
-                localStorage.setItem('access_token', idToken);
-                
-                // Success state
-                btn.innerHTML = `✓ Signed in as ${user.displayName}`;
-                btn.classList.remove('bg-white', 'text-gray-800', 'border-gray-600');
-                btn.classList.add('bg-green-50', 'text-green-700', 'border-green-200');
-                
-                // Redirect to home
-                setTimeout(() => {
-                    window.location.href = 'home.html';
-                }, 1000);
-
-            } catch (error) {
-                console.error("Login failed", error);
-                btn.innerHTML = originalContent;
-                btn.disabled = false;
-                alert(`Login Failed: ${error.message}`);
-            }
-        };
-    </script> -->
     <script src="../js/auth.js"></script>
+    <script src="../js/navbar.js"></script>
     <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
