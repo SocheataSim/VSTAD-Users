@@ -38,7 +38,14 @@
             transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
             transition-duration: 150ms;
         }
-    
+        .carousel-image {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .carousel-image.active {
+            opacity: 1;
+        }
     </style>
 </head>
 <body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
@@ -106,61 +113,92 @@
         </div>
     </header>
 
-      <section class="px-4 sm:px-6 lg:px-12 py-16">
-        <div class="max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center gap-10">
+    <!-- Hero Section -->
+    <section class="relative h-[70vh] w-full overflow-hidden">
+        <!-- Image Carousel -->
+        <div class="absolute inset-0">
+            <!-- Image 1 -->
+            <div class="carousel-image active absolute inset-0 bg-cover bg-center" 
+                 style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('hero1.jpg');">
+            </div>
+            
+            <!-- Image 2 -->
+            <div class="carousel-image inactive absolute inset-0 bg-cover bg-center" 
+                 style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('hero2.JPG');">
+            </div>
+            
+            <!-- Image 3 -->
+            <div class="carousel-image inactive absolute inset-0 bg-cover bg-center" 
+                 style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('hero3.JPG');">
+            </div>
+            
+            <!-- Image 4 -->
+            <div class="carousel-image inactive absolute inset-0 bg-cover bg-center" 
+                 style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('hero4.JPG');">
+            </div>
+        </div>
 
-            <!-- Text Section -->
-            <div class="w-full md:w-1/2 text-center md:text-left">
-                <h1 class="text-1xl dark:text-white sm:text-5xl lg:text-6xl font-extrabold text-primary-color leading-tight mb-6">
-                    Discover, Watch, and Share
-                    <span class="text-secondary-color">Amazing Videos</span> from 
-                    <br>ISTAD
+        <!-- Overlay Content -->
+        <div class="relative z-10 flex h-full items-center justify-center px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-4xl mx-auto">
+                <h1 class="fade-in text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight">
+                    Discover, share and watch amazing 
+                    <span class="block bg-clip-text text-white">
+                        videos from VSTAD
+                    </span>
                 </h1>
-
-                <p class="text-lg sm:text-xl text-acent-color mb-10">
-                    Join our community to discover the story of ISTAD.
+                
+                <p class="fade-in text-lg sm:text-xl md:text-2xl text-gray-200 mb-8 sm:mb-10 max-w-2xl mx-auto px-4">
+                    ISTAD is a noteworthy science and technology Institute in Cambodia. INSTITUTE has routed Cambodian students to advanced science and technology, research, and develop digital skills and our graduates have been guaranteed excellent job opportunities with the Top IT company.
                 </p>
-
-                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                    <button class="px-8 py-4 bg-blue-600 hover:bg-primary-color text-lg text-white font-semibold rounded-full transition-all transform hover:scale-105 duration-200">
-                        Get Started
+                
+                <div class="fade-in flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <button class="group relative px-5 py-3 bg-primary text-white text-lg  font-semibold border-2 border-secondary-color rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl w-full sm:w-auto">
+                        <span class="relative z-10">Get Started</span>
+                        <div class="absolute inset-0 bg-acent-color opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <a href="./pages/sign_up.html"></a>
                     </button>
-
-                    <button class="px-8 py-4  text-secondary-color font-semibold text-lg rounded-full border-2 border-secondary-color transition-all hover:bg-white/10 transition-all transform hover:scale-105 duration-200">
+                    
+                    <button class="px-5 py-3 bg-white bg-opacity-10 backdrop-blur-sm text-white text-lg font-semibold rounded-lg border-2 border-white border-opacity-30 hover:bg-opacity-20 transition-all duration-300 hover:scale-105 w-full sm:w-auto">
                         Learn More
+                        <a href="./pages/about_us.html"></a>
                     </button>
                 </div>
             </div>
-
-            <!-- Image Section -->
-            <div class="w-full md:w-1/2 flex justify-center">
-                <img 
-                  src="./asset/herosectionimage.png" 
-                  alt="Hero Light" 
-                  class="w-full h-full object-cover object-center block dark:hidden"
-              />
-
-              <!-- Dark mode image -->
-              <img 
-                  src="./asset/herosection-dark.png" 
-                  alt="Hero Dark" 
-                  class="w-full h-full object-cover object-center hidden dark:block"
-              />
-              </div>
-            
         </div>
+
+        <!-- Navigation Arrows -->
+        <div class="fade-in flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 sm:mb-20">
+        <button id="prevBtn" class="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-20 bg-white bg-opacity-20 backdrop-blur-sm hover:bg-opacity-30 text-white p-3 sm:p-4 rounded-full transition-all duration-300 hover:scale-110 group">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+            </svg>
+        </button>
+        
+        <button id="nextBtn" class="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-20 bg-white bg-opacity-20 backdrop-blur-sm hover:bg-opacity-30 text-white p-3 sm:p-4 rounded-full transition-all duration-300 hover:scale-110 group">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+        </button>
+        </div>
+
+        <!-- Pagination Dots -->
+        <!-- <div class="absolute bottom-1 sm:bottom-3 left-1/2 -translate-x-1/2 z-20 flex gap-3"></div>
+            <button class="dot w-2 h-2 rounded-full bg-white transition-all duration-300 opacity-100 scale-110" data-index="0"></button>
+            <button class="dot w-2 h-2 rounded-full bg-white bg-opacity-40 hover:bg-opacity-60 transition-all duration-300" data-index="1"></button>
+            <button class="dot w-2 h-2 rounded-full bg-white bg-opacity-40 hover:bg-opacity-60 transition-all duration-300" data-index="2"></button>
+            <button class="dot w-2 h-2 rounded-full bg-white bg-opacity-40 hover:bg-opacity-60 transition-all duration-300" data-index="3"></button>
+        </div> -->
     </section>
-
-
       <!-- Features Section -->
       <section class="py-20 px-4 sm:px-6 lg:px-8">
           <div class="max-w-7xl mx-auto">
-              <h2 class="text-3xl sm:text-4xl font-bold text-center text-gray-900 dark:text-white mb-16">
+              <h2 class="text-3xl sm:text-4xl font-bold text-center text-primary-color dark:text-white mb-16">
                   Why Choose VSTAD?
               </h2>
               <div class="grid md:grid-cols-3 gap-8">
                   <!-- Feature 1 -->
-                  <div class="text-center p-6 rounded-xl border-2 bg-background-hover  dark:bg-gray-800 border-gray-200 dark:border-gray-600 dark:border-gray-700 transform hover:-translate-y-2 transition-all duration-200">
+                  <div class="text-center p-6 rounded-xl border-2 bg-white  dark:bg-gray-800 border-gray-200 dark:border-gray-600 dark:border-gray-700 transform hover:-translate-y-2 transition-all duration-200">
                       <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
                           <svg class="w-8 h-8 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
@@ -198,14 +236,14 @@
     <!-- Testimonials Section -->
     <section class="py-20 px-4 sm:px-6 lg:px-8  bg-white dark:bg-gray-900">
         <div class="max-w-7xl mx-auto">
-            <h2 class="text-3xl sm:text-4xl font-bold text-center  text-gray-900 dark:text-white mb-16">
+            <h2 class="text-3xl sm:text-4xl font-bold text-center  text-primary-color dark:text-white mb-16">
                 What Our Users Say
             </h2>
             <div class="grid md:grid-cols-3 gap-8 max-w-3xl mx-auto">
                 <!-- Testimonial 1 -->
-                <div class="bg-white border-2 border-gray-200 dark:border-gray-600 dark:bg-gray-900 p-8 rounded-2xl transition-all duration-300 hover:-translate-y-2">
+                <div class="bg-white  border-2 border-gray-200 dark:border-gray-600 dark:bg-gray-900 p-8 rounded-2xl transition-all duration-300 hover:-translate-y-2">
                     <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                        <div class="w-12 h-12 dark:bg-background-hover bg-background-hover from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
                             T
                         </div>
                         <div class="ml-4">
@@ -221,7 +259,7 @@
                 <!-- Testimonial 2 -->
                 <div class="bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-600 p-8 rounded-2xl transition-all duration-300 hover:-translate-y-2">
                     <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                        <div class="w-12 h-12 dark:bg-background-hover bg-background-hover from-purple-400 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
                             V
                         </div>
                         <div class="ml-4">
@@ -236,7 +274,7 @@
                 <!-- Testimonial 2 -->
                 <div class="bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-600 p-8 rounded-2xl transition-all duration-300 hover:-translate-y-2">
                     <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                        <div class="w-12 h-12 dark:bg-background-hover bg-background-hover from-purple-400 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
                             N
                         </div>
                         <div class="ml-4">
@@ -257,7 +295,7 @@
             <div class="max-w-6xl mx-auto">
                 <!-- Section Header -->
                 <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">How VSTAD Works</h2>
+                    <h2 class="text-3xl md:text-5xl font-bold text-primary-color dark:text-white mb-4">How VSTAD Works</h2>
                     <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
                         Your journey with ISTAD starts here. Follow these simple steps to explore and engage with our community.
                     </p>
@@ -440,7 +478,44 @@
       </div>
     </div>
   </footer>
-</body>
-    <script src="./js/darkmode.js"></script>
+  <script>
+document.addEventListener('DOMContentLoaded', function() {
+    let currentIndex = 0;
+    const images = document.querySelectorAll('.carousel-image');
+    const dots = document.querySelectorAll('.dot');
+    
+    function showSlide(n) {
+        images.forEach(img => img.classList.remove('active'));
+        dots.forEach(dot => {
+            dot.classList.remove('opacity-100', 'scale-110');
+            dot.classList.add('bg-opacity-40');
+        });
+        
+        images[n].classList.add('active');
+        dots[n].classList.add('opacity-100', 'scale-110');
+        dots[n].classList.remove('bg-opacity-40');
+    }
+    
+    // Auto advance
+    setInterval(() => {
+        currentIndex = (currentIndex + 1) % images.length;
+        showSlide(currentIndex);
+    }, 3000);
+    
+    // Manual controls
+    document.getElementById('nextBtn').onclick = () => {
+        currentIndex = (currentIndex + 1) % images.length;
+        showSlide(currentIndex);
+    };
+    
+    document.getElementById('prevBtn').onclick = () => {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        showSlide(currentIndex);
+    };
+});
+</script>
+<script src="./js/darkmode.js"></script>
   <script src="./js/index.js"></script>
+</body>
+    
 </html>

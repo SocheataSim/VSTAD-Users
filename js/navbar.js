@@ -43,7 +43,7 @@ function updateNavbar() {
       <button 
         id="profile-menu-button"
         onclick="toggleProfileMenu()"
-        class="inline-flex items-center justify-center gap-2 h-9 px-4 py-2 text-sm font-medium text-white bg-white dark:bg-transparent border hover:bg-red-50 dark:hover:bg-red-950/30 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-red-500/20 shadow-sm"
+        class="inline-flex items-center justify-center gap-2 h-9 px-4 py-2 text-sm font-medium dark:text-white text-black  bg-white dark:bg-transparent rounded-md transition-colors focus:outline-none focus:ring-2"
       >
         <img 
           src="${displayPhoto}" 
@@ -60,10 +60,10 @@ function updateNavbar() {
       <!-- Dropdown Menu -->
       <div 
         id="profile-dropdown"
-        class="hidden absolute right-0 mt-2 w-56 bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-800 py-1 z-50"
+        class="hidden absolute right-0 mt-2 w-56 bg-white dark:text-white dark:bg-gray-900 rounded-lg shadow-lg text-black py-1 z-50"
       >
         <!-- User Info -->
-        <div class="px-4 py-3 border-b border-gray-200 dark:border-gray-800">
+        <div class="px-4 py-3 dark:border-gray-800">
           <p class="text-sm font-medium text-gray-900 dark:text-white">${displayName}</p>
           <p class="text-xs text-gray-500 dark:text-gray-400 truncate">${displayEmail}</p>
         </div>

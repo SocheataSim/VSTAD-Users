@@ -347,6 +347,7 @@
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
 
+
     <!-- Card Container -->
     <div class="bg-white rounded-xl shadow-sm w-full max-w-md p-8 md:p-10">
         
@@ -407,6 +408,7 @@
                 </div>
             </div>
 
+
             <!-- Google Button -->
             <button type="button" id="googleBtn" onclick="handleGoogleLogin()" class="w-full bg-white border border-gray-600 text-gray-800 font-bold py-3 rounded-lg transition-colors flex items-center justify-center gap-2 hover:bg-gray-50">
                 <svg class="w-5 h-5" viewBox="0 0 24 24">
@@ -421,7 +423,7 @@
 
         <!-- Footer -->
         <p class="text-center text-sm text-gray-500 mt-6">
-            Already have an account? <a href="login.html" class="text-[#DC2626] font-bold hover:underline">Log In</a>
+            Already have an account? <a href="sign_in.html" class="text-[#DC2626] font-bold hover:underline">Log In</a>
         </p>
 
     </div>
@@ -475,6 +477,7 @@
                     body: JSON.stringify({ username, email, password })
                 });
 
+
                 const result = await response.json();
                 
                 if (response.ok) {
@@ -523,6 +526,55 @@
                 btn.innerHTML = originalText;
             }
         });
+        // Add crypto-js library
+
+// Generate consistent password
+function generateGooglePassword(email, firebaseUID) {
+    const SECRET = 'YOUR_SECRET_KEY_HERE'; // Change this!
+    const combined = `${email}:${firebaseUID}:${SECRET}`;
+    const hash = CryptoJS.SHA256(combined).toString();
+    return hash.substring(0, 20); // First 20 chars
+}
+
+// Usage in Google Sign-In
+const result = await signInWithPopup(auth, provider);
+const user = result.user;
+const password = generateGooglePassword(user.email, user.uid);
+
+// Try login first
+let response = await fetch('/api/auth/login', {
+    method: 'POST',
+    body: JSON.stringify({ 
+        email: user.email, 
+        password: password 
+    })
+});
+
+// If login fails (user doesn't exist), register
+if (!response.ok) {
+    await fetch('/api/auth/register', {
+        method: 'POST',
+        body: JSON.stringify({
+            username: user.displayName,
+            email: user.email,
+            password: password
+        })
+    });
+    
+    // Login again after registration
+    response = await fetch('/api/auth/login', {
+        method: 'POST',
+        body: JSON.stringify({ 
+            email: user.email, 
+            password: password 
+        })
+    });
+}
+
+const data = await response.json();
+localStorage.setItem('access_token', data.access_token);
     </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+<script src="../js/"></script>
 </body>
 </html>
