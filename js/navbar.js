@@ -17,7 +17,7 @@ function updateNavbar() {
     authSection.id = 'navbar-auth-section';
     
     // Find the "Sign in" button and replace it
-    const signInButton = navContainer.querySelector('a[href="sign_in.html"]');
+    const signInButton = navContainer.querySelector('a[href="/pages/sign_in.html"]');
     if (signInButton) {
       signInButton.replaceWith(authSection);
     } else {
@@ -29,14 +29,24 @@ function updateNavbar() {
     // User is logged in - show profile dropdown
     
     // ✅ FIXED: Get user data from localStorage directly
-    const user = JSON.parse(localStorage.getItem('user') || '{}');
-    const profile = JSON.parse(localStorage.getItem('profile') || '{}');
-    
-    // Merge all possible sources of user data
-    const displayName = user.name || user.username || profile.username || profile.name || 'User';
-    const displayEmail = user.email || profile.email || '';
-    const displayPhoto = user.photo || user.profile_image || profile.avatar || profile.photo || `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=1e40af&color=fff`;
-    
+const user = JSON.parse(localStorage.getItem('user') || '{}');
+const profile = JSON.parse(localStorage.getItem('profile') || '{}');
+const userProfile = JSON.parse(localStorage.getItem('userProfile') || '{}');
+// Merge all possible sources of user data
+const displayName = userProfile.full_name || user.full_name || user.name || user.username || profile.username || profile.name || 'User';
+const displayEmail = user.email || profile.email || '';
+// Build profile image URL - prioritize userProfile (from profile.js upload)
+let displayPhoto;
+if (userProfile.profile_image) {
+  // User has uploaded a profile image - use API endpoint
+  displayPhoto = `https://vstad-api.cheatdev.online/api/profile/profile-image/${userProfile.profile_image}`;
+} else if (user.profile_image) {
+  // Fallback to user.profile_image from auth
+  displayPhoto = `https://vstad-api.cheatdev.online/api/profile/profile-image/${user.profile_image}`;
+} else {
+  // Final fallback to generated avatar
+  displayPhoto = user.photo || profile.avatar || profile.photo || `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=1e40af&color=fff`;
+}
     authSection.className = 'relative';
     authSection.innerHTML = `
       <!-- Profile Button -->
@@ -69,30 +79,13 @@ function updateNavbar() {
         </div>
 
         <!-- Menu Items -->
-        <a href="profile.html" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+        <a href="/pages/user_profile/profile.html" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
           <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
             <circle cx="12" cy="7" r="4"/>
           </svg>
           Your Profile
         </a>
-
-        <a href="favorites.html" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-          <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
-          </svg>
-          Favorites
-        </a>
-
-        <a href="history.html" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-          <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
-            <path d="M3 3v5h5"/>
-            <path d="M12 7v5l4 2"/>
-          </svg>
-          Watch History
-        </a>
-
         <div class="border-t border-gray-200 dark:border-gray-800 my-1"></div>
 
         <button 
@@ -112,7 +105,7 @@ function updateNavbar() {
     // User not logged in - show sign in button
     authSection.className = '';
     authSection.innerHTML = `
-      <a href="sign_in.html" class="inline-flex items-center justify-center h-9 px-4 py-2 text-sm font-medium text-red-600 dark:text-red-400 bg-white dark:bg-transparent border border-red-500/50 dark:border-red-500 hover:bg-red-50 dark:hover:bg-red-950/30 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-red-500/20 shadow-sm">
+      <a href="/pages/sign_in.html" class="inline-flex items-center justify-center h-9 px-4 py-2 text-sm font-medium text-red-600 dark:text-red-400 bg-white dark:bg-transparent border border-red-500/50 dark:border-red-500 hover:bg-red-50 dark:hover:bg-red-950/30 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-red-500/20 shadow-sm">
         Sign in
       </a>
     `;
@@ -291,10 +284,10 @@ function setupMobileMenu() {
     mobileMenuDropdown.className = 'hidden md:hidden absolute left-0 right-0 top-full bg-white dark:bg-gray-950 border-b border-gray-200 dark:border-gray-800 shadow-lg z-40';
     mobileMenuDropdown.innerHTML = `
       <nav class="container mx-auto px-4 py-4 flex flex-col gap-2">
-        <a href="./home.html" class="px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">
+        <a href="./page/home.html" class="px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">
           Home
         </a>
-        <a href="./playlist.html" class="px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">
+        <a href="../page/playlist.html" class="px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">
           Explore
         </a>
       </nav>
@@ -485,11 +478,11 @@ document.addEventListener('click', (event) => {
 function handleLogout() {
   if (confirm('Are you sure you want to logout?')) {
     if (AUTH && typeof AUTH.logout === 'function') {
-      AUTH.logout('home.html');
+      AUTH.logout('/pages/home.html');
     } else {
       // Fallback if AUTH is not available
       localStorage.clear();
-      window.location.href = 'home.html';
+      window.location.href = '/pages/home.html';
     }
   }
 }

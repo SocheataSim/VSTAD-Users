@@ -5,8 +5,7 @@ const BASE_URL = "https://vstad-api.cheatdev.online/api";
 
 // ⚠️ IMPORTANT: Set your bearer token here after login
 // Example: bearerToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...";
-let bearerToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMiIsImV4cCI6MTc3MjMzNTUzMn0.IvU7FE0EGawfsGNQPxmowIYEJM7L82TRMPjnp6BjdiI"; 
-
+let bearerToken = localStorage.getItem('access_token') || localStorage.getItem('authToken');
 // 🐛 DEBUG MODE - Set to true to see detailed logs
 const DEBUG = true;
 
@@ -114,11 +113,19 @@ async function loadProfile() {
         // 📝 API Endpoint: GET /api/profile/me
         // 📝 Response: { id, username, email, full_name, bio, profile_image, ... }
         
-        if (bearerToken && bearerToken !== "YOUR_TOKEN_HERE") {
+        if (bearerToken) {
             try {
-                console.log("📤 Fetching profile from API...");
+    // Get user ID from localStorage
+                const userId = localStorage.getItem('userId') || localStorage.getItem('user_id');
                 
-                const res = await fetch('https://vstad-api.cheatdev.online/api/profile/me', {
+                if (!userId) {
+                    console.warn("⚠️ No user ID found. Using localStorage fallback.");
+                    throw new Error("NO_USER_ID");
+                }
+                
+                console.log("📤 Fetching profile from API for user:", userId);
+                
+                const res = await fetch(`https://vstad-api.cheatdev.online/api/admin/users/${userId}`, {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${bearerToken}`,
@@ -130,7 +137,7 @@ async function loadProfile() {
 
                 if (res.status === 404) {
                     // 📝 ENDPOINT DOESN'T EXIST - Fall back to localStorage
-                    console.warn("⚠️ GET /api/profile/me endpoint not found. Using localStorage fallback.");
+                    console.warn("⚠️ User not found in API. Using localStorage fallback.");
                     throw new Error("ENDPOINT_NOT_FOUND");
                 }
 

@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<<<< Temporary merge branch 1
     <title>About Us</title>
     <link rel="stylesheet" href="./src/output.css">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -28,50 +27,39 @@
     </script>
     <style>
         /* Smooth transition for theme toggle */
-        body,
-        header,
-        div,
-        span,
-        button,
-        input {
+        body, header, div, span, button, input {
             transition-property: background-color, border-color, color, fill, stroke;
             transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
             transition-duration: 150ms;
         }
     </style>
 </head>
-
 <body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
     <!-- Header -->
-    <header
-        class="sticky top-0 z-50 w-full border-b border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-gray-950/80 backdrop-blur-md supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-gray-950/60">
+    <header class="sticky top-0 z-50 w-full border-b border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-gray-950/80 backdrop-blur-md supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-gray-950/60">
         <div class="container mx-auto px-4 md:px-6 h-16 flex items-center justify-between gap-4">
-
+            
             <!-- Left: Logo -->
             <a href="#" class="flex items-center gap-2 flex-shrink-0">
                 <!-- Logo Icon -->
-                <div
-                    class="relative w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-blue-800 overflow-hidden shrink-0">
-                    <img src="../asset/logo copy.png" alt="">
+                <div class="relative w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-blue-800 overflow-hidden shrink-0">
+                        <img src="../asset/logo copy.png" alt="">
                 </div>
                 <!-- Logo Text -->
-                <span
-                    class="text-xl font-bold tracking-tight text-gray-900 dark:text-white hidden sm:block">VSTAD</span>
+                <span class="text-xl font-bold tracking-tight text-gray-900 dark:text-white hidden sm:block">VSTAD</span>
             </a>
 
             <!-- Center: Search Bar (Hidden on mobile, distinct on desktop) -->
             <div class="hidden md:flex flex-1 max-w-md mx-4">
                 <div class="relative w-full">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-search">
-                            <circle cx="11" cy="11" r="8" />
-                            <path d="m21 21-4.3-4.3" />
-                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
                     </div>
-                    <input type="search" placeholder="Search"
-                        class="w-full h-10 pl-10 pr-4 rounded-full bg-gray-100 dark:bg-gray-800 border-transparent focus:bg-white dark:focus:bg-gray-900 border focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 text-sm transition-all">
+                    <input 
+                        type="search" 
+                        placeholder="Search" 
+                        class="w-full h-10 pl-10 pr-4 rounded-full bg-gray-100 dark:bg-gray-800 border-transparent focus:bg-white dark:focus:bg-gray-900 border focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 text-sm transition-all"
+                    >
                 </div>
             </div>
 
@@ -79,171 +67,358 @@
             <div class="flex items-center gap-2 md:gap-6">
                 <!-- Nav Links (Desktop) -->
                 <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
-                    <a href="./home.html"
-                        class="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors">Home</a>
-                    <a href="./playlist.html"
-                        class="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors">Explore</a>
+                    <a href="home.html" class="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors">Home</a>
+                    <a href="playlist.html" class="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors">Explore</a>
                 </nav>
 
                 <!-- Mobile Search Toggle -->
-                <button
-                    class="md:hidden p-2 text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800 rounded-full transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="11" cy="11" r="8" />
-                        <path d="m21 21-4.3-4.3" />
-                    </svg>
+                <button class="md:hidden p-2 text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800 rounded-full transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
                     <span class="sr-only">Search</span>
                 </button>
 
                 <!-- Theme Toggle -->
-                <button id="theme-toggle"
+                <button 
+                    id="theme-toggle"
                     class="p-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700"
-                    aria-label="Toggle Dark Mode">
+                    aria-label="Toggle Dark Mode"
+                >
                     <!-- Sun Icon (Show in Dark Mode) -->
-                    <svg id="sun-icon" class="w-5 h-5 hidden dark:block" xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="4" />
-                        <path d="M12 2v2" />
-                        <path d="M12 20v2" />
-                        <path d="m4.93 4.93 1.41 1.41" />
-                        <path d="m17.66 17.66 1.41 1.41" />
-                        <path d="M2 12h2" />
-                        <path d="M20 12h2" />
-                        <path d="m6.34 17.66-1.41 1.41" />
-                        <path d="m19.07 4.93-1.41 1.41" />
-                    </svg>
-
+                    <svg id="sun-icon" class="w-5 h-5 hidden dark:block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+                    
                     <!-- Moon Icon (Show in Light Mode) -->
-                    <svg id="moon-icon" class="w-5 h-5 block dark:hidden" xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
-                    </svg>
+                    <svg id="moon-icon" class="w-5 h-5 block dark:hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
                 </button>
 
                 <!-- Sign In Button -->
-                <a href="sign_in.html"
-                    class="inline-flex items-center justify-center h-9 px-4 py-2 text-sm font-medium text-red-600 dark:text-red-400 bg-white dark:bg-transparent border border-red-500/50 dark:border-red-500 hover:bg-red-50 dark:hover:bg-red-950/30 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-red-500/20 shadow-sm">
+                <!-- <a id="signInButton" href="./pages/sign_in.html" class="inline-flex items-center justify-center h-9 px-4 py-2 text-sm font-medium text-red-600 dark:text-red-400 bg-white dark:bg-transparent border border-red-500/50 dark:border-red-500 hover:bg-red-50 dark:hover:bg-red-950/30 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-red-500/20 shadow-sm">
                     Sign in
-                </a>
+                </a> -->
             </div>
         </div>
     </header>
 
     <!-- Main -->
-    <main>
+         <!-- Main Content for Scrolling Demo -->
+    <main class="container !max-w-full !px-0 mx-auto mt-8 mb-16">    
+    <!-- Hero Section -->
+    <!-- <section class="relative bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 text-white py-24 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-5xl font-bold mb-6">VSTAD</h1>
+            <p class="text-xl leading-relaxed">The video platform then offers a secure digital hub and is used to showcase the creation and connection of video communities.</p>
+        </div>
+        <div class="absolute bottom-0 right-0 w-64 h-64 bg-blue-700 rounded-tl-full opacity-30"></div>
+    </section> -->
+        <section class="relative w-full bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 text-white py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 md:px-8 lg:px-10">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-5 md:mb-6">VSTAD</h1>
+                <p class="text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed px-2 sm:px-4 md:px-6">The video platform then offers a secure digital hub and is used to showcase the creation and connection of video communities.</p>
+            </div>
+            <div class="absolute bottom-0 right-0 w-32 h-32 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 bg-blue-700 rounded-tl-full opacity-30"></div>
+        </section>
+        <!-- Platform Description -->
+        <section class="py-16 px-6">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop" alt="Team collaboration" class="rounded-lg shadow-xl w-full">
+                    </div>
+                    <div>
+                        <p class="text-gray-700 dark:text-white text-lg leading-relaxed">Our video platform was created to provide a stable, secure, and easy-to-use digital environment for users who want to showcase content, create masterpieces, and connect with their communities through video.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About VSTAD -->
+        <section class="py-16 px-6 bg-white dark:bg-gray-900 transition-colors duration-300">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">About VSTAD</h2>
+                <p class="text-gray-700 text-lg dark:text-white leading-relaxed">At VSTAD, we believe that every student has the ability to create their own future. This platform is designed to nurture, inspire, and motivate you to become skilled and creative individuals in the digital age. We provide students with expert lessons, a collaborative environment, and learning opportunities that will help them succeed in their careers and real lives.</p>
+            </div>
+        </section>
 
 
+
+    <!-- Meet Our Mentors Section -->
+        <section class="py-12 bg-gray-50 dark:bg-gray-800 transition-colors duration-300">
+            <div class="container mx-auto px-4">
+                <h2 class="text-2xl font-bold text-center mb-10 text-gray-800 dark:text-white">Meet Our Mentors</h2>
+                <div class="flex flex-wrap justify-center gap-8 max-w-2xl mx-auto">
+                    <!-- Mentor 1 -->
+                    <div class="text-center">
+                        <div class="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-4 border-blue-600">
+                            <img src="../asset/Menber/T.Mey.jpg" alt="Zara Sorell" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-semibold text-gray-800 dark:text-white">Ms. Mom Reksmey</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Mentor</p>
+                        <div class="flex justify-center gap-2 mt-2">
+                            <a href="#" class="text-gray-400 hover:text-blue-600 transition-colors"><i class="fab fa-facebook text-sm"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-blue-600 transition-colors"><i class="fab fa-instagram text-sm"></i></a>
+                        </div>
+                    </div>
+                    <!-- Mentor 2 -->
+                    <div class="text-center">
+                        <div class="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-4 border-purple-600 bg-purple-500">
+                            <img src="../asset/Menber/mine.JPG" alt="Maya Mistry" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-semibold text-gray-800 dark:text-white">Ms. Srorng Sokcheatt</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Mentor</p>
+                        <div class="flex justify-center gap-2 mt-2">
+                            <a href="#" class="text-gray-400 hover:text-blue-600 transition-colors"><i class="fab fa-facebook text-sm"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-blue-600 transition-colors"><i class="fab fa-instagram text-sm"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Meet Our Team Section -->
+        <section class="py-12 bg-white dark:bg-gray-900 transition-colors duration-300">
+            <div class="container mx-auto px-4">
+                <h2 class="text-2xl font-bold text-center mb-10 text-gray-800 dark:text-white">Meet Our Team</h2>
+                
+                <!-- Top Row - 3 Members -->
+                <div class="flex flex-wrap justify-center gap-8 mb-8">
+                    <!-- Team Member 1 -->
+                    <div class="text-center w-36">
+                        <div class="w-30 h-30 mx-auto mb-3 rounded-full overflow-hidden border-4 border-blue-600">
+                            <img src="../asset/Menber/cheata.jpg" alt="Zano Sorell" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-semibold text-sm text-gray-800 dark:text-white">Sim Socheata</h3>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">Leader</p>
+                        <div class="flex justify-center gap-2 mt-2">
+                            <a href="#" class="text-gray-400 hover:text-blue-600 transition-colors"><i class="fab fa-facebook text-xs"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-blue-600 transition-colors"><i class="fab fa-instagram text-xs"></i></a>
+                        </div>
+                    </div>
+                    <!-- Team Member 2 -->
+                    <div class="text-center w-36">
+                        <div class="w-30 h-30 mx-auto mb-3 rounded-full overflow-hidden border-4 border-purple-600">
+                            <img src="../asset/Menber/bomnorng.jpg" alt="Maya Mistry" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-semibold text-sm text-gray-800 dark:text-white">Soeurt Bomnorng</h3>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">Member</p>
+                        <div class="flex justify-center gap-2 mt-2">
+                            <a href="#" class="text-gray-400 hover:text-blue-600 transition-colors"><i class="fab fa-facebook text-xs"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-blue-600 transition-colors"><i class="fab fa-instagram text-xs"></i></a>
+                        </div>
+                    </div>
+                    <!-- Team Member 3 -->
+                    <div class="text-center w-36">
+                        <div class="w-30 h-30 mx-auto mb-3 rounded-full overflow-hidden border-4 border-blue-600">
+                            <img src="../asset/Menber/lina.jpg" alt="Alexis Jensen" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-semibold text-sm text-gray-800 dark:text-white">Lut Lina</h3>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">Member</p>
+                        <div class="flex justify-center gap-2 mt-2">
+                            <a href="#" class="text-gray-400 hover:text-blue-600 transition-colors"><i class="fab fa-facebook text-xs"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-blue-600 transition-colors"><i class="fab fa-instagram text-xs"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Row - 4 Members -->
+                <div class="flex flex-wrap justify-center gap-8">
+                    <!-- Team Member 4 -->
+                    <div class="text-center w-36">
+                        <div class="w-30 h-30 mx-auto mb-3 rounded-full overflow-hidden border-4 border-blue-600">
+                            <img src="../asset/Menber/heng.jpg" alt="James Vial" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-semibold text-sm text-gray-800 dark:text-white">Chhon Sokheng</h3>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">Member</p>
+                        <div class="flex justify-center gap-2 mt-2">
+                            <a href="#" class="text-gray-400 hover:text-blue-600 transition-colors"><i class="fab fa-facebook text-xs"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-blue-600 transition-colors"><i class="fab fa-instagram text-xs"></i></a>
+                        </div>
+                    </div>
+                    <!-- Team Member 5 -->
+                    <div class="text-center w-36">
+                        <div class="w-30 h-30 mx-auto mb-3 rounded-full overflow-hidden border-4 border-blue-600">
+                            <img src="../asset/Menber/roth.jpg" alt="Katia Batiyas" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-semibold text-sm text-gray-800 dark:text-white">Khorn Sothearoth</h3>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">Member</p>
+                        <div class="flex justify-center gap-2 mt-2">
+                            <a href="#" class="text-gray-400 hover:text-blue-600 transition-colors"><i class="fab fa-facebook text-xs"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-blue-600 transition-colors"><i class="fab fa-instagram text-xs"></i></a>
+                        </div>
+                    </div>
+                    <!-- Team Member 6 -->
+                    <div class="text-center w-36">
+                        <div class="w-30 h-30 mx-auto mb-3 rounded-full overflow-hidden border-4 border-blue-600">
+                            <img src="../asset/Menber/sokhim.jpg" alt="Dominic Gums" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-semibold text-sm text-gray-800 dark:text-white">Khorn Sokkhim</h3>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">Member</p>
+                        <div class="flex justify-center gap-2 mt-2">
+                            <a href="#" class="text-gray-400 hover:text-blue-600 transition-colors"><i class="fab fa-facebook text-xs"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-blue-600 transition-colors"><i class="fab fa-instagram text-xs"></i></a>
+                        </div>
+                    </div>
+                    <!-- Team Member 7 -->
+                    <div class="text-center w-36">
+                        <div class="w-30 h-30 mx-auto mb-3 rounded-full overflow-hidden border-4 border-blue-600">
+                            <img src="../asset/Menber/vannath.jpg" alt="James Vial" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-semibold text-sm text-gray-800 dark:text-white">Lorn Vanath</h3>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">Member</p>
+                        <div class="flex justify-center gap-2 mt-2">
+                            <a href="#" class="text-gray-400 hover:text-blue-600 transition-colors"><i class="fab fa-facebook text-xs"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-blue-600 transition-colors"><i class="fab fa-instagram text-xs"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
 
     <!-- Footer -->
     <footer class="bg-[#1e3a8a] dark:bg-gray-950 text-white py-10 px-6">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
-
-                <!-- Logo & Description -->
-                <div class="flex flex-col items-center text-center">
-                    <div class="w-24 h-24 flex items-center justify-center mb-4 ">
-                        <img src="../asset/logo copy.png" alt=""
-                            class="w-24 h-24 rounded-full border-2 flex items-center justify-center mb-4 ">
-                    </div>
-                    <p class="text-sm text-gray-200 leading-relaxed">
-                        Empowering learners through innovative education and technology. Providing the latest
-                        methodology with high-quality training and mentoring.
-                    </p>
-                </div>
-
-                <!-- Quick Links -->
-                <div>
-                    <h3 class="font-semibold text-lg mb-4 pb-2">Quick Links</h3>
-                    <ul class="space-y-2">
-                        <li><a href="./home.html" class="text-gray-200 hover:text-yellow-400 transition-colors">Home</a>
-                        </li>
-                        <li><a href="./playlist.html"
-                                class="text-gray-200 hover:text-yellow-400 transition-colors">Explore</a></li>
-                    </ul>
-                </div>
-
-                <!-- About -->
-                <div>
-                    <h3 class="font-semibold text-lg mb-4 pb-2">About</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-200 hover:text-yellow-400 transition-colors">About us</a></li>
-                        <li><a href="#" class="text-gray-200 hover:text-yellow-400 transition-colors">Our Teams</a></li>
-                        <li><a href="#" class="text-gray-200 hover:text-yellow-400 transition-colors">Contact Us</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Contact Us -->
-                <div>
-                    <h3 class="font-semibold text-lg mb-4  pb-2">Contact Us</h3>
-                    <ul class="space-y-2 text-sm text-gray-200">
-                        <li>No. 24, Street 562, Sangkat kak I,</li>
-                        <li>Khan Toul Kork, Phnom Penh.</li>
-                        <li class="pt-2">Tel: +855 717 240 181</li>
-                        <li class="pt-2">
-                            <a href="mailto:VSATD@gmail.com"
-                                class="hover:text-yellow-400 transition-colors">VSATD@gmail.com</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Sponsor and Organize -->
-                <div class="flex flex-col items-center">
-                    <h3 class="font-semibold text-lg mb-4 pb-2 w-full text-center">Sponsor and Organize</h3>
-                    <div class="flex items-center gap-2 rounded-lg px-4 py-2">
-                        <img src="../asset/istad-logo-white.png" alt="ISTAD Logo" class="w-250 h-auto ">
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Bottom Bar -->
-            <div
-                class="mt-10 pt-6 border-t border-white/20 flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="text-sm text-gray-300">
-                    © 2025 VSTAD | Sponsored and organized by ISTAD
-                </p>
-
-                <!-- Social Media Icons -->
-                <div class="flex items-center gap-4">
-                    <a href="#"
-                        class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-yellow-400 hover:text-blue-900 transition-colors">
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                            <path
-                                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-                        </svg>
-                    </a>
-                    <a href="#"
-                        class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-yellow-400 hover:text-blue-900 transition-colors">
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                            <path
-                                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                        </svg>
-                    </a>
-                    <a href="#"
-                        class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-yellow-400 hover:text-blue-900 transition-colors">
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                            <path
-                                d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm-1 17.5v-11l9 5.5-9 5.5z" />
-                        </svg>
-                    </a>
-                    <a href="#"
-                        class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-yellow-400 hover:text-blue-900 transition-colors">
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                            <path
-                                d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
-                        </svg>
-                    </a>
-                </div>
-            </div>
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+        
+        <!-- Logo & Description -->
+        <div class="flex flex-col items-center text-center">
+          <div class="w-24 h-24 flex items-center justify-center mb-4 ">
+            <img src="../asset/logo copy.png" alt="" class="w-24 h-24 rounded-full border-2 flex items-center justify-center mb-4 ">
+          </div>
+          <p class="text-sm text-gray-200 leading-relaxed">
+            Empowering learners through innovative education and technology. Providing the latest methodology with high-quality training and mentoring.
+          </p>
         </div>
-    </footer>
-    <script src="../js/darkmode.js"></script>
-</body>
 
+        <!-- Quick Links -->
+        <div>
+          <h3 class="font-semibold text-lg mb-4 pb-2">Quick Links</h3>
+          <ul class="space-y-2">
+            <li><a href="./home.html" class="text-gray-200 hover:text-yellow-400 transition-colors">Home</a></li>
+            <li><a href="./playlist.html" class="text-gray-200 hover:text-yellow-400 transition-colors">Explore</a></li>
+          </ul>
+        </div>
+
+        <!-- About -->
+        <div>
+          <h3 class="font-semibold text-lg mb-4 pb-2">About</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-200 hover:text-yellow-400 transition-colors">About us</a></li>
+            <li><a href="#" class="text-gray-200 hover:text-yellow-400 transition-colors">Our Teams</a></li>
+            <li><a href="#" class="text-gray-200 hover:text-yellow-400 transition-colors">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact Us -->
+        <div>
+          <h3 class="font-semibold text-lg mb-4  pb-2">Contact Us</h3>
+          <ul class="space-y-2 text-sm text-gray-200">
+            <li>No. 24, Street 562, Sangkat kak I,</li>
+            <li>Khan Toul Kork, Phnom Penh.</li>
+            <li class="pt-2">Tel: +855 717 240 181</li>
+            <li class="pt-2">
+              <a href="mailto:VSATD@gmail.com" class="hover:text-yellow-400 transition-colors">VSATD@gmail.com</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Sponsor and Organize -->
+        <div class="flex flex-col items-center">
+          <h3 class="font-semibold text-lg mb-4 pb-2 w-full text-center">Sponsor and Organize</h3>
+          <div class="flex items-center gap-2 rounded-lg px-4 py-2">
+            <img src="../asset/istad-logo-white.png" alt="ISTAD Logo" class="w-250 h-auto ">
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="mt-10 pt-6 border-t border-white/20 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-sm text-gray-300">
+          © 2025 VSTAD | Sponsored and organized by ISTAD
+        </p>
+        
+        <!-- Social Media Icons -->
+        <div class="flex items-center gap-4">
+          <a href="#" class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-yellow-400 hover:text-blue-900 transition-colors">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="#" class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-yellow-400 hover:text-blue-900 transition-colors">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="#" class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-yellow-400 hover:text-blue-900 transition-colors">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm-1 17.5v-11l9 5.5-9 5.5z"/></svg>
+          </a>
+          <a href="#" class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-yellow-400 hover:text-blue-900 transition-colors">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+    <script src="../js/darkmode.js"></script>
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+        
+        // Check for saved theme preference or default to 'light'
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        if (currentTheme === 'dark') {
+            htmlElement.classList.add('dark');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            htmlElement.classList.toggle('dark');
+            const theme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
+            localStorage.setItem('theme', theme);
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const hamburgerIcon = document.getElementById('hamburger-icon');
+        const closeIcon = document.getElementById('close-icon');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('closed');
+            mobileMenu.classList.toggle('open');
+            hamburgerIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        });
+
+        // Mobile Search Toggle
+        const mobileSearchToggle = document.getElementById('mobile-search-toggle');
+        const mobileSearch = document.getElementById('mobile-search');
+
+        mobileSearchToggle.addEventListener('click', () => {
+            mobileSearch.classList.toggle('closed');
+            mobileSearch.classList.toggle('open');
+            
+            // Close mobile menu if open
+            if (mobileMenu.classList.contains('open')) {
+                mobileMenu.classList.remove('open');
+                mobileMenu.classList.add('closed');
+                hamburgerIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            }
+        });
+
+        // Close menus when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('header')) {
+                mobileMenu.classList.add('closed');
+                mobileMenu.classList.remove('open');
+                mobileSearch.classList.add('closed');
+                mobileSearch.classList.remove('open');
+                hamburgerIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            }
+        });
+    </script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/index.js"></script>
+    <script src="../js/navbar.js"></script>
+</body>
 </html>

@@ -171,6 +171,15 @@ const AUTH = {
             if (userInfo.profile_image) {
                 localStorage.setItem('userAvatar', userInfo.profile_image);
             }
+            // Also sync with userProfile for navbar profile image display
+            const existingUserProfile = JSON.parse(localStorage.getItem('userProfile') || '{}');
+            const updatedUserProfile = {
+                ...existingUserProfile,
+                full_name: userInfo.full_name,
+                bio: userInfo.bio,
+                profile_image: userInfo.profile_image
+            };
+            localStorage.setItem('userProfile', JSON.stringify(updatedUserProfile));
         }
 
         // Trigger navbar update after storing auth data

@@ -4,14 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<<<< Temporary merge branch 1
     <title>Sign Up - VSTAD</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Firebase SDKs -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
@@ -30,7 +28,6 @@
         const auth = getAuth(app);
         const provider = new GoogleAuthProvider();
 
-        // Make available globally
         window.auth = auth;
         window.provider = provider;
         window.signInWithPopup = signInWithPopup;
@@ -57,10 +54,8 @@
 
 <body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
 
-    <!-- Card Container -->
     <div class="bg-white rounded-xl shadow-sm w-full max-w-md p-8 md:p-10">
 
-        <!-- Header / Logo -->
         <div class="flex flex-col items-center mb-8">
             <div
                 class="w-16 h-16 bg-blue-800 rounded-full flex items-center justify-center mb-4 relative overflow-hidden border-2 border-white shadow-sm">
@@ -69,13 +64,10 @@
             <h1 class="text-2xl font-bold text-gray-900">Sign Up</h1>
         </div>
 
-        <!-- Error/Success Message Display -->
         <div id="messageBox" class="hidden mb-4 p-3 rounded-lg text-sm"></div>
 
-        <!-- Form -->
         <form id="registerForm" class="space-y-5">
 
-            <!-- Username -->
             <div>
                 <label class="block text-sm font-semibold text-gray-900 mb-1.5">
                     Username<span class="text-red-600">*</span>
@@ -84,7 +76,6 @@
                     class="w-full px-4 py-3 bg-white border border-gray-400 rounded-lg text-gray-700 placeholder-gray-500 focus:outline-none focus:border-gray-600 focus:ring-0 transition-colors">
             </div>
 
-            <!-- Email -->
             <div>
                 <label class="block text-sm font-semibold text-gray-900 mb-1.5">
                     Email<span class="text-red-600">*</span>
@@ -93,7 +84,6 @@
                     class="w-full px-4 py-3 bg-white border border-gray-400 rounded-lg text-gray-700 placeholder-gray-500 focus:outline-none focus:border-gray-600 focus:ring-0 transition-colors">
             </div>
 
-            <!-- Password -->
             <div>
                 <label class="block text-sm font-semibold text-gray-900 mb-1.5">
                     Password<span class="text-red-600">*</span>
@@ -104,13 +94,11 @@
                 <p class="text-xs text-gray-500 mt-2">Must be at least 8 characters</p>
             </div>
 
-            <!-- Primary Button -->
             <button type="submit" id="signupBtn"
                 class="w-full bg-[#DC2626] hover:bg-red-700 text-white font-medium py-3 rounded-lg transition-colors mt-2 text-base">
                 Sign Up
             </button>
 
-            <!-- Divider -->
             <div class="relative my-6">
                 <div class="absolute inset-0 flex items-center">
                     <div class="w-full border-t border-gray-300"></div>
@@ -121,7 +109,6 @@
             </div>
 
 
-            <!-- Google Button -->
             <button type="button" id="googleBtn" onclick="handleGoogleLogin()"
                 class="w-full bg-white border border-gray-600 text-gray-800 font-bold py-3 rounded-lg transition-colors flex items-center justify-center gap-2 hover:bg-gray-50">
                 <svg class="w-5 h-5" viewBox="0 0 24 24">
@@ -142,27 +129,22 @@
             </button>
         </form>
 
-        <!-- Footer -->
         <p class="text-center text-sm text-gray-500 mt-6">
             Already have an account? <a href="sign_in.html" class="text-[#DC2626] font-bold hover:underline">Log In</a>
         </p>
 
     </div>
 
-    <!-- Include auth.js -->
     <script src="../js/auth.js"></script>
     <script src="../js/navbar.js"></script>
 
     <script>
-        // Redirect if already logged in
         if (AUTH && AUTH.isLoggedIn()) {
             window.location.href = 'home.html';
         }
 
-        // Show message helper
         function showMessage(message, isError = false) {
             const messageBox = document.getElementById('messageBox');
-            // Handle object messages to prevent [object Object]
             let displayMsg = message;
             if (typeof message === 'object') {
                 displayMsg = message.message || message.detail || JSON.stringify(message);
@@ -182,7 +164,6 @@
             }
         }
 
-        // Handle form submission
         document.getElementById('registerForm').addEventListener('submit', async (e) => {
             e.preventDefault();
 
@@ -196,32 +177,27 @@
                 btn.disabled = true;
                 btn.innerHTML = '<span class="animate-spin inline-block">⟳</span> Creating Account...';
 
-                // Call AUTH.register() from auth.js
                 const result = await AUTH.register(username, email, password);
 
-                // Success state
                 btn.innerHTML = '✓ Account Created!';
                 btn.classList.remove('bg-[#DC2626]', 'hover:bg-red-700');
                 btn.classList.add('bg-green-600');
 
                 showMessage(`Account created successfully! Please log in with your credentials.`);
 
-                // Registration doesn't return access_token, so redirect to login page
                 setTimeout(() => {
                     window.location.href = 'sign_in.html';
                 }, 1500);
 
             } catch (error) {
                 console.error('Registration error:', error);
-                showMessage(error, true); // Pass the error object directly, helper handles it
+                showMessage(error, true);
 
-                // Reset button
                 btn.disabled = false;
                 btn.innerHTML = originalText;
             }
         });
 
-        // Google Login Handler
         async function handleGoogleLogin() {
             const btn = document.getElementById('googleBtn');
             const originalContent = btn.innerHTML;
@@ -230,26 +206,22 @@
                 btn.innerHTML = '<span class="animate-spin">⟳</span> Connecting to Google...';
                 btn.disabled = true;
 
-                // Use the globally available Firebase functions
                 const result = await window.signInWithPopup(window.auth, window.provider);
                 const user = result.user;
                 const idToken = await user.getIdToken();
 
                 console.log("User signed in with Google:", user.email);
 
-                // Call AUTH.loginWithGoogle
                 await AUTH.loginWithGoogle(idToken, {
                     email: user.email,
                     name: user.displayName,
                     photo: user.photoURL
                 });
 
-                // Success state
                 btn.innerHTML = `✓ Signed in as ${user.displayName}`;
                 btn.classList.remove('bg-white', 'text-gray-800', 'border-gray-600');
                 btn.classList.add('bg-green-50', 'text-green-700', 'border-green-200');
 
-                // Redirect to home
                 setTimeout(() => {
                     window.location.href = 'home.html';
                 }, 1000);
@@ -264,22 +236,3 @@
     </script>
 </body>
 </html>
-=========
-    <title>VSTAD Platform</title>
-    <meta name="description" content="A video-sharing platform where you can watch, like, comment, and share videos uploaded by our community." />
-    <meta name="keywords" content="video platform, VSTAD, watch videos, share platform, creators, like videos, comment" />
-    <meta name="author" content="VSTAD Platform" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="VSTAD Platform" />
-    <meta property="og:description" content="Discover trending videos, like and comment, and connect with VSTAD." />
-    <meta property="og:image" content="https://i.pinimg.com/736x/5e/77/09/5e7709769cd1d2d23c610653211e443f.jpg" />
-    <meta property="og:site_name" content="VSTAD Platform" />
-    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../src/output.css">
-</head>
-<body>
-    <p class="text-acent-color">Hello</p>
-    <p class="font-khmer">ហេ</p>
-</body>
-</html>
->>>>>>>>> Temporary merge branch 2
