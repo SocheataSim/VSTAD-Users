@@ -3,7 +3,6 @@
 const themeToggleBtn = document.getElementById('theme-toggle');
         const htmlElement = document.documentElement;
 
-        // Check for saved user preference, if any, on load
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             htmlElement.classList.add('dark');
         } else {
@@ -11,7 +10,6 @@ const themeToggleBtn = document.getElementById('theme-toggle');
         }
 
         themeToggleBtn.addEventListener('click', function() {
-            // if set via local storage previously
             if (localStorage.getItem('color-theme')) {
                 if (localStorage.getItem('color-theme') === 'light') {
                     htmlElement.classList.add('dark');

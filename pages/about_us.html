@@ -26,7 +26,6 @@
         }
     </script>
     <style>
-        /* Smooth transition for theme toggle */
         body, header, div, span, button, input {
             transition-property: background-color, border-color, color, fill, stroke;
             transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -39,17 +38,13 @@
     <header class="sticky top-0 z-50 w-full border-b border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-gray-950/80 backdrop-blur-md supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-gray-950/60">
         <div class="container mx-auto px-4 md:px-6 h-16 flex items-center justify-between gap-4">
             
-            <!-- Left: Logo -->
-            <a href="#" class="flex items-center gap-2 flex-shrink-0">
-                <!-- Logo Icon -->
+            <a href="about_us.html" class="flex items-center gap-2 flex-shrink-0">
                 <div class="relative w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-blue-800 overflow-hidden shrink-0">
                         <img src="../asset/logo copy.png" alt="">
                 </div>
-                <!-- Logo Text -->
                 <span class="text-xl font-bold tracking-tight text-gray-900 dark:text-white hidden sm:block">VSTAD</span>
             </a>
 
-            <!-- Center: Search Bar (Hidden on mobile, distinct on desktop) -->
             <div class="hidden md:flex flex-1 max-w-md mx-4">
                 <div class="relative w-full">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">
@@ -65,50 +60,33 @@
 
             <!-- Right: Navigation & Actions -->
             <div class="flex items-center gap-2 md:gap-6">
-                <!-- Nav Links (Desktop) -->
                 <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
                     <a href="home.html" class="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors">Home</a>
                     <a href="playlist.html" class="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors">Explore</a>
                 </nav>
 
-                <!-- Mobile Search Toggle -->
                 <button class="md:hidden p-2 text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800 rounded-full transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
                     <span class="sr-only">Search</span>
                 </button>
 
-                <!-- Theme Toggle -->
                 <button 
                     id="theme-toggle"
                     class="p-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700"
                     aria-label="Toggle Dark Mode"
                 >
-                    <!-- Sun Icon (Show in Dark Mode) -->
                     <svg id="sun-icon" class="w-5 h-5 hidden dark:block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
                     
-                    <!-- Moon Icon (Show in Light Mode) -->
                     <svg id="moon-icon" class="w-5 h-5 block dark:hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
                 </button>
 
-                <!-- Sign In Button -->
-                <!-- <a id="signInButton" href="./pages/sign_in.html" class="inline-flex items-center justify-center h-9 px-4 py-2 text-sm font-medium text-red-600 dark:text-red-400 bg-white dark:bg-transparent border border-red-500/50 dark:border-red-500 hover:bg-red-50 dark:hover:bg-red-950/30 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-red-500/20 shadow-sm">
-                    Sign in
-                </a> -->
             </div>
         </div>
     </header>
 
     <!-- Main -->
-         <!-- Main Content for Scrolling Demo -->
     <main class="container !max-w-full !px-0 mx-auto mt-8 mb-16">    
-    <!-- Hero Section -->
-    <!-- <section class="relative bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 text-white py-24 px-6">
-        <div class="max-w-4xl mx-auto text-center">
-            <h1 class="text-5xl font-bold mb-6">VSTAD</h1>
-            <p class="text-xl leading-relaxed">The video platform then offers a secure digital hub and is used to showcase the creation and connection of video communities.</p>
-        </div>
-        <div class="absolute bottom-0 right-0 w-64 h-64 bg-blue-700 rounded-tl-full opacity-30"></div>
-    </section> -->
+    
         <section class="relative w-full bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 text-white py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 md:px-8 lg:px-10">
             <div class="max-w-4xl mx-auto text-center">
                 <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-5 md:mb-6">VSTAD</h1>
@@ -116,12 +94,11 @@
             </div>
             <div class="absolute bottom-0 right-0 w-32 h-32 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 bg-blue-700 rounded-tl-full opacity-30"></div>
         </section>
-        <!-- Platform Description -->
         <section class="py-16 px-6">
             <div class="max-w-6xl mx-auto">
                 <div class="grid md:grid-cols-2 gap-12 items-center">
                     <div>
-                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop" alt="Team collaboration" class="rounded-lg shadow-xl w-full">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop" alt="Team collaboration" class="rounded-lg w-full">
                     </div>
                     <div>
                         <p class="text-gray-700 dark:text-white text-lg leading-relaxed">Our video platform was created to provide a stable, secure, and easy-to-use digital environment for users who want to showcase content, create masterpieces, and connect with their communities through video.</p>
@@ -174,11 +151,10 @@
         </section>
 
         <!-- Meet Our Team Section -->
-        <section class="py-12 bg-white dark:bg-gray-900 transition-colors duration-300">
+        <section id="ourteam" class="py-12 bg-white dark:bg-gray-900 transition-colors duration-300">
             <div class="container mx-auto px-4">
                 <h2 class="text-2xl font-bold text-center mb-10 text-gray-800 dark:text-white">Meet Our Team</h2>
                 
-                <!-- Top Row - 3 Members -->
                 <div class="flex flex-wrap justify-center gap-8 mb-8">
                     <!-- Team Member 1 -->
                     <div class="text-center w-36">
@@ -218,7 +194,6 @@
                     </div>
                 </div>
 
-                <!-- Bottom Row - 4 Members -->
                 <div class="flex flex-wrap justify-center gap-8">
                     <!-- Team Member 4 -->
                     <div class="text-center w-36">
@@ -302,14 +277,14 @@
         <div>
           <h3 class="font-semibold text-lg mb-4 pb-2">About</h3>
           <ul class="space-y-2">
-            <li><a href="#" class="text-gray-200 hover:text-yellow-400 transition-colors">About us</a></li>
-            <li><a href="#" class="text-gray-200 hover:text-yellow-400 transition-colors">Our Teams</a></li>
-            <li><a href="#" class="text-gray-200 hover:text-yellow-400 transition-colors">Contact Us</a></li>
+            <li><a href="about_us.html" class="text-gray-200 hover:text-yellow-400 transition-colors">About us</a></li>
+            <li><a href="about_us.html#ourteam" class="text-gray-200 hover:text-yellow-400 transition-colors">Our Teams</a></li>
+            <li><a href="about_us.html#contact-us" class="text-gray-200 hover:text-yellow-400 transition-colors">Contact Us</a></li>
           </ul>
         </div>
 
         <!-- Contact Us -->
-        <div>
+        <div id="contact-us">
           <h3 class="font-semibold text-lg mb-4  pb-2">Contact Us</h3>
           <ul class="space-y-2 text-sm text-gray-200">
             <li>No. 24, Street 562, Sangkat kak I,</li>
@@ -359,11 +334,9 @@
 
     <script src="../js/darkmode.js"></script>
     <script>
-        // Theme Toggle
         const themeToggle = document.getElementById('theme-toggle');
         const htmlElement = document.documentElement;
         
-        // Check for saved theme preference or default to 'light'
         const currentTheme = localStorage.getItem('theme') || 'light';
         if (currentTheme === 'dark') {
             htmlElement.classList.add('dark');
@@ -375,7 +348,6 @@
             localStorage.setItem('theme', theme);
         });
 
-        // Mobile Menu Toggle
         const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
         const mobileMenu = document.getElementById('mobile-menu');
         const hamburgerIcon = document.getElementById('hamburger-icon');
@@ -388,7 +360,6 @@
             closeIcon.classList.toggle('hidden');
         });
 
-        // Mobile Search Toggle
         const mobileSearchToggle = document.getElementById('mobile-search-toggle');
         const mobileSearch = document.getElementById('mobile-search');
 
@@ -396,7 +367,6 @@
             mobileSearch.classList.toggle('closed');
             mobileSearch.classList.toggle('open');
             
-            // Close mobile menu if open
             if (mobileMenu.classList.contains('open')) {
                 mobileMenu.classList.remove('open');
                 mobileMenu.classList.add('closed');
@@ -405,7 +375,6 @@
             }
         });
 
-        // Close menus when clicking outside
         document.addEventListener('click', (e) => {
             if (!e.target.closest('header')) {
                 mobileMenu.classList.add('closed');

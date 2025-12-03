@@ -1582,7 +1582,9 @@ function displayTrendingVideos(videos) {
         videoCard.innerHTML = `
             <div class="thumbnail-wrapper mb-3 relative cursor-pointer" onclick="window.location.href='display.html?id=${video.id}'">
                 <img src="${video.thumbnail_url}" ...>
-                <span class="absolute bottom-2 right-2...">...</span>
+                <span class="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white text-xs font-semibold px-2 py-0.5 rounded">
+                            ${video.duration ? ((video.duration)/100).toFixed(2) : "0.00"}s
+                </span>
                 <div class="absolute inset-0 flex items-center justify-center scale-100 group-hover:scale-110 transition-transform duration-300">
                     <button class="text-white font-bold px-4 py-2 rounded-full bg-opacity-50 pointer-events-none"> 
                         <i class="fa-solid fa-play"></i> 
@@ -1607,13 +1609,11 @@ function displayTrendingVideos(videos) {
     });
 }
 
-// ============================= 
 // SEARCH FUNCTIONALITY - FIXED
-// ============================= 
 async function fetchData() {
     try {
         const searchInput = document.getElementById('search-input');
-        const keyword = searchInput.value.trim(); // Don't convert to lowercase!
+        const keyword = searchInput.value.trim(); 
 
         if (!keyword) {
             console.log('Empty search keyword');
@@ -1622,25 +1622,21 @@ async function fetchData() {
 
         console.log('Searching for:', keyword);
         
-        // Check if we're on the right page
         const container = document.getElementById("video-results");
         
-        // If not on home/playlist page, redirect there with search query
         if (!container) {
             console.log('Not on search page, redirecting...');
             window.location.href = `home.html?search=${encodeURIComponent(keyword)}`;
             return;
         }
         
-        isSearchMode = true; // Set search mode flag
+        isSearchMode = true; 
         
-        // Hide trending section during search
         const trendingSection = document.getElementById("trendingSection");
         if (trendingSection) {
             trendingSection.style.display = 'none';
         }
         
-        // Show loading state
         container.innerHTML = `
             <div class="col-span-full flex justify-center items-center py-12">
                 <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
@@ -1663,7 +1659,6 @@ async function fetchData() {
         allVideos = data.videos || [];
         console.log('allVideos set to:', allVideos);
         
-        // Show search results count
         if (allVideos.length > 0) {
             console.log('Calling displayVideos with', allVideos.length, 'videos');
             displayVideos(allVideos, `Found ${data.total || allVideos.length} result(s) for "${keyword}"`);
@@ -1680,7 +1675,6 @@ async function fetchData() {
             `;
         }
 
-        // Hide load more button in search mode
         const loadMoreBtn = document.getElementById("loadMoreBtn");
         if (loadMoreBtn) {
             loadMoreBtn.style.display = 'none';
@@ -1701,41 +1695,33 @@ async function fetchData() {
     }
 }
 
-// Search input event listeners
 const searchInput = document.getElementById("search-input");
 
 if (searchInput) {
     let searchTimeout;
     
-    // Handle input changes
     searchInput.addEventListener("input", (e) => {
         const value = e.target.value.trim();
         
-        // Clear any existing timeout
         clearTimeout(searchTimeout);
         
-        // If search is cleared, go back to normal mode
         if (value === "") {
             console.log('Search cleared, restoring homepage');
             isSearchMode = false;
             currentSkip = 0;
             
-            // Show trending section again
             const trendingSection = document.getElementById("trendingSection");
             if (trendingSection) {
                 trendingSection.style.display = 'block';
             }
             
-            // Show all videos section header
             const allVideosSection = document.getElementById("allVideosSection");
             if (allVideosSection) {
                 allVideosSection.style.display = 'block';
             }
             
-            // Reload homepage videos
             loadHomepageVideos();
             
-            // Show load more button
             const loadMoreBtn = document.getElementById("loadMoreBtn");
             if (loadMoreBtn) {
                 loadMoreBtn.style.display = 'block';
@@ -1743,19 +1729,16 @@ if (searchInput) {
         }
     });
 
-    // Handle Enter key press
     searchInput.addEventListener("keypress", (e) => {
         if (e.key === "Enter") {
-            e.preventDefault(); // Prevent form submission if in a form
+            e.preventDefault(); 
             console.log('Enter pressed, triggering search');
             fetchData();
         }
     });
 }
 
-// ============================= 
 // DISPLAY ALL VIDEOS
-// ============================= 
 function displayVideos(videos, headerMessage = null) {
     const container = document.getElementById("video-results");
 
@@ -1776,11 +1759,9 @@ function displayVideos(videos, headerMessage = null) {
         return;
     }
 
-    // Clear container first
     container.innerHTML = "";
     console.log('Displaying', videos.length, 'videos');
 
-    // Add header message if provided
     if (headerMessage) {
         const headerDiv = document.createElement('div');
         headerDiv.className = "col-span-full mb-2 px-2";
@@ -1799,7 +1780,9 @@ function displayVideos(videos, headerMessage = null) {
         videoCard.innerHTML = `
             <div class="thumbnail-wrapper mb-3 relative cursor-pointer" onclick="window.location.href='display.html?id=${video.id}'">
                 <img src="${video.thumbnail_url}" ...>
-                <span class="absolute bottom-2 right-2...">...</span>
+                <span class="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white text-xs font-semibold px-2 py-0.5 rounded">
+                            ${video.duration ? ((video.duration)/100).toFixed(2) : "0.00"}s
+                        </span>
                 <div class="absolute inset-0 flex items-center justify-center scale-100 group-hover:scale-110 transition-transform duration-300">
                     <button class="text-white font-bold px-4 py-2 rounded-full bg-opacity-50 pointer-events-none"> 
                         <i class="fa-solid fa-play"></i> 
@@ -1824,11 +1807,8 @@ function displayVideos(videos, headerMessage = null) {
     });
 }
 
-// ============================= 
 // LOAD HOMEPAGE VIDEOS
-// ============================= 
 async function loadHomepageVideos(append = false) {
-    // Don't load if in search mode
     if (isSearchMode && !append) {
         console.log('In search mode, skipping homepage load');
         return;
@@ -1948,9 +1928,7 @@ async function loadHomepageVideos(append = false) {
     }
 }
 
-// ============================= 
 // LOAD MORE VIDEOS HANDLER
-// ============================= 
 const loadMoreBtn = document.getElementById("loadMoreBtn");
 if (loadMoreBtn) {
     loadMoreBtn.addEventListener("click", () => {
@@ -1960,9 +1938,7 @@ if (loadMoreBtn) {
     });
 }
 
-// ============================= 
 // TIME AGO HELPER
-// ============================= 
 function timeSince(date) {
     const seconds = Math.floor((new Date() - date) / 1000);
     const intervals = {
@@ -1982,33 +1958,26 @@ function timeSince(date) {
     return "Just now";
 }
 
-// ============================= 
 // INITIALIZE ON PAGE LOAD
-// ============================= 
 window.addEventListener("load", () => {
     console.log('Page loaded, fetching videos...');
     
-    // Check if there's a search query in URL
     const urlParams = new URLSearchParams(window.location.search);
     const searchQuery = urlParams.get('search');
     
     if (searchQuery && document.getElementById("video-results")) {
-        // If there's a search query, populate the search box and trigger search
         const searchInput = document.getElementById('search-input');
         if (searchInput) {
             searchInput.value = searchQuery;
             fetchData();
         }
     } else {
-        // Normal page load
         fetchTrendingVideos();
         loadHomepageVideos();
     }
 });
 
-// ============================= 
 // VIDEO DISPLAY PAGE LOGIC
-// ============================= 
 document.addEventListener("DOMContentLoaded", () => {
     const urlParams = new URLSearchParams(window.location.search);
     const videoId = urlParams.get("id");
@@ -2060,9 +2029,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch(error => console.error("Error loading video:", error));
 });
 
-// ============================= 
 // SIDEBAR VIDEOS
-// ============================= 
 document.addEventListener("DOMContentLoaded", () => {
     const sidebarContainerId = "sidebarVideos";
     const sidebarContainer = document.getElementById(sidebarContainerId);
@@ -2089,7 +2056,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div class="thumbnail-wrapper mb-3 relative">
                         <img src="${video.thumbnail_url}" alt="${video.title}" class="w-full rounded-lg object-cover">
                         <span class="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white text-xs font-semibold px-2 py-0.5 rounded">
-                            ${video.duration ? video.duration.toFixed(2) : "0.00"}s
+                            ${video.duration ? ((video.duration)/100).toFixed(2) : "0.00"}s
                         </span>
                         <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 scale-100 group-hover:scale-110 transition-transform duration-300">
                             <button class="text-white font-bold px-4 py-2 rounded-full bg-opacity-50" 
@@ -2117,9 +2084,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch(err => console.error("Error loading sidebar videos:", err));
 });
 
-// ============================= 
 // LANDING PAGE MAIN VIDEO
-// ============================= 
 document.addEventListener("DOMContentLoaded", () => {
     const mainVideo = document.getElementById("mainVideo");
 
@@ -2137,9 +2102,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch(err => console.error("Error fetching video:", err));
 });
 
-// ============================= 
 // FILTER BY YEAR
-// ============================= 
 document.addEventListener("DOMContentLoaded", () => {
     const yearFilter = document.getElementById('year-filter');
     if (yearFilter) {
@@ -2159,7 +2122,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// Load current user's profile image for comment section
 async function loadCommentProfileImage() {
     try {
         const bearerToken = localStorage.getItem('access_token') || localStorage.getItem('authToken');
@@ -2169,7 +2131,6 @@ async function loadCommentProfileImage() {
             return;
         }
 
-        // Try to get from API first
         const userId = localStorage.getItem('userId') || localStorage.getItem('user_id');
         
         if (userId) {
@@ -2185,7 +2146,6 @@ async function loadCommentProfileImage() {
                 const userData = await res.json();
                 
                 if (userData.profile_image) {
-                    // Use the API endpoint pattern to get profile image
                     const profileImageUrl = `https://vstad-api.cheatdev.online/api/profile/profile-image/${userData.profile_image}`;
                     document.getElementById('commentProfileImage').src = profileImageUrl;
                     return;
@@ -2193,7 +2153,6 @@ async function loadCommentProfileImage() {
             }
         }
 
-        // Fallback to localStorage
         const savedProfile = localStorage.getItem('userProfile');
         if (savedProfile) {
             const profileData = JSON.parse(savedProfile);
@@ -2209,13 +2168,10 @@ async function loadCommentProfileImage() {
     }
 }
 
-// Call this when the page loads
 document.addEventListener('DOMContentLoaded', () => {
     loadCommentProfileImage();
-    // ... your other initialization code
 });
 
-// Load current user's profile image for comment section
 async function loadCommentProfileImage() {
     try {
         const token = AUTH.getToken();
@@ -2253,7 +2209,6 @@ async function loadCommentProfileImage() {
             // Update comment profile image
             const commentProfileImage = document.getElementById('commentProfileImage');
             if (commentProfileImage && userData.profile_image) {
-                // Use the API endpoint pattern: GET /api/profile/profile-image/:filename
                 const profileImageUrl = `https://vstad-api.cheatdev.online/api/profile/profile-image/${userData.profile_image}`;
                 commentProfileImage.src = profileImageUrl;
                 console.log('✅ Comment profile image updated:', profileImageUrl);
@@ -2271,7 +2226,6 @@ async function loadCommentProfileImage() {
     }
 }
 
-// Fallback: Load profile image from localStorage cache
 function loadProfileImageFromCache() {
     try {
         const savedProfile = localStorage.getItem('userProfile');
@@ -2290,8 +2244,6 @@ function loadProfileImageFromCache() {
     }
 }
 
-// Call this when the page loads
 document.addEventListener('DOMContentLoaded', () => {
     loadCommentProfileImage();
-    // ... your other initialization code
 });

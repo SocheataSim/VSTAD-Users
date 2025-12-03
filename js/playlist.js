@@ -1,10 +1,9 @@
-// Wrap everything in IIFE to avoid global scope conflicts
 (function() {
     'use strict';
     
     // API Configuration
     const API_BASE_URL = 'https://vstad-api.cheatdev.online/api';
-    const USER_ID = 1; // Change this to dynamic user ID if needed
+    const USER_ID = 1; // ID = 1 for admin
 
     // State Management
     let currentPlaylistId = 'all';
@@ -43,12 +42,10 @@ async function fetchAllPlaylists() {
         if (!response.ok) throw new Error('Failed to fetch playlists');
         
         const data = await response.json();
-        // API returns array directly, not wrapped in data object
         allPlaylists = Array.isArray(data) ? data : (data.data || []);
         
         console.log('Fetched playlists:', allPlaylists);
         
-        // Update playlist buttons dynamically (optional)
         updatePlaylistButtons();
     } catch (error) {
         console.error('Error fetching playlists:', error);
@@ -64,8 +61,8 @@ async function fetchAllVideos() {
                 .then(res => res.json())
                 .then(data => ({
                     playlistId: playlist.id,
-                    playlistName: playlist.title, // API uses 'title' not 'name'
-                    videos: data.videos || [] // Videos are directly in response
+                    playlistName: playlist.title, 
+                    videos: data.videos || []
                 }))
         );
         
@@ -73,7 +70,6 @@ async function fetchAllVideos() {
         
         console.log('Fetched videos from playlists:', playlistsWithVideos);
         
-        // Flatten all videos into a single array with playlist info
         allVideos = playlistsWithVideos.flatMap(playlist => 
             playlist.videos.map(video => ({
                 ...video,
@@ -82,7 +78,6 @@ async function fetchAllVideos() {
             }))
         );
         
-        // Remove duplicates if a video appears in multiple playlists
         allVideos = Array.from(new Map(allVideos.map(v => [v.id, v])).values());
         
         console.log('Total videos loaded:', allVideos.length);
@@ -163,32 +158,34 @@ function displayVideos(append = false) {
     }
 }
 
-// Create video card element
+
 function createVideoCard(video) {
     const card = document.createElement('div');
     card.className = 'video-card group cursor-pointer';
     
-    // Extract video data with fallbacks
     const thumbnail = video.thumbnail_url || video.thumbnail || 'https://via.placeholder.com/640x360?text=No+Thumbnail';
     const title = video.title || 'Untitled Video';
-    const channelName = video.channel_name || video.author || 'Unknown Channel';
-    const views = formatViews(video.views || video.view_count || 0);
+    const channelName = video.uploader?.username || video.channel_name || video.author || 'Unknown Channel';
+    const views = formatViews(video.view_count || video.views || 0);
     const uploadDate = formatDate(video.created_at || video.upload_date);
     const duration = formatDuration(video.duration || 0);
     const videoId = video.id;
-    const channelAvatar = video.channel_avatar || video.avatar_url || '';
+    const profileImg = video.uploader?.profile_image || 'https://i.pinimg.com/736x/29/cb/14/29cb14444ce3baf2704e0402b1a39e0e.jpg';
     
     card.innerHTML = `
-        <div class="thumbnail-wrapper mb-3">
+        <div class="thumbnail-wrapper mb-3 relative cursor-pointer" onclick="window.location.href='display.html?id=${videoId}'">
             <img src="${thumbnail}" alt="${title}" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/640x360?text=No+Thumbnail'">
             ${duration ? `<span class="duration-badge">${duration}</span>` : ''}
+            <div class="absolute inset-0 flex items-center justify-center scale-100 group-hover:scale-110 transition-transform duration-300">
+                <button class="text-white font-bold px-4 py-2 rounded-full bg-opacity-50 pointer-events-none">
+                    <i class="fa-solid fa-play"></i> 
+                </button>
+            </div>
         </div>
         <div class="flex gap-3">
-            <div class="profile-circle">
-                ${channelAvatar 
-                    ? `<img src="${channelAvatar}" alt="${channelName}" onerror="this.innerHTML='${getInitials(channelName)}'">` 
-                    : getInitials(channelName)
-                }
+            <div class="w-9 h-9 rounded-full overflow-hidden flex-shrink-0">
+                <img src="${profileImg}" alt="${channelName}" class="w-full h-full object-cover" 
+                     onerror="this.src='https://i.pinimg.com/736x/29/cb/14/29cb14444ce3baf2704e0402b1a39e0e.jpg'">
             </div>
             <div class="flex-1 min-w-0">
                 <h3 class="font-semibold text-sm mb-1 line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
@@ -200,33 +197,21 @@ function createVideoCard(video) {
         </div>
     `;
     
-    // Add click handler to navigate to video page
-    card.addEventListener('click', () => {
-        // You can navigate to video detail page here
-        console.log('Video clicked:', videoId);
-        // window.location.href = `video-detail.html?id=${videoId}`;
-    });
-    
     return card;
 }
-
-// Update playlist buttons dynamically (optional)
 function updatePlaylistButtons() {
     const playlistContainer = document.querySelector('.playlist-scroll .flex');
     
-    // Keep the "All Videos" button
     const allButton = playlistContainer.querySelector('[data-playlist="all"]');
     
-    // Clear other buttons
     playlistContainer.innerHTML = '';
     playlistContainer.appendChild(allButton);
     
-    // Add buttons for each playlist
     allPlaylists.forEach(playlist => {
         const button = document.createElement('button');
         button.className = 'playlist-btn px-6 py-3 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-medium whitespace-nowrap';
         button.setAttribute('data-playlist', playlist.id);
-        button.textContent = playlist.title; // API uses 'title' not 'name'
+        button.textContent = playlist.title; 
         
         button.addEventListener('click', (e) => {
             // Remove active class from all buttons
@@ -249,30 +234,23 @@ function updatePlaylistButtons() {
 
 // Handle playlist change
 function handlePlaylistChange(playlistId, playlistName) {
-    // This function is no longer needed as we moved the logic inline
-    // Keeping it for backward compatibility if called elsewhere
+    
     currentPlaylistId = playlistId;
     playlistTitle.textContent = playlistName;
     displayVideos();
 }
 
-// Event Listeners
-// Note: Playlist button event listeners are added dynamically in updatePlaylistButtons()
-// We only need to add listener for the "All Videos" button here
+
 const allVideosBtn = document.querySelector('.playlist-btn[data-playlist="all"]');
 if (allVideosBtn) {
     allVideosBtn.addEventListener('click', (e) => {
-        // Remove active class from all buttons
         document.querySelectorAll('.playlist-btn').forEach(btn => btn.classList.remove('active'));
         
-        // Add active class to clicked button
         e.target.classList.add('active');
         
-        // Update state
         currentPlaylistId = 'all';
         playlistTitle.textContent = 'All Videos';
         
-        // Display filtered videos
         displayVideos();
     });
 }
@@ -287,7 +265,6 @@ loadMoreBtn.addEventListener('click', () => {
     displayVideos(true);
 });
 
-// Search functionality
 const searchInput = document.getElementById('search-input');
 if (searchInput) {
     searchInput.addEventListener('input', (e) => {
@@ -324,7 +301,6 @@ if (searchInput) {
     });
 }
 
-// Utility Functions
 function formatViews(views) {
     if (views >= 1000000) {
         return (views / 1000000).toFixed(1) + 'M';
@@ -350,19 +326,15 @@ function formatDate(dateString) {
     return `${Math.floor(diffDays / 365)} years ago`;
 }
 
+
 function formatDuration(seconds) {
     if (!seconds) return '';
     
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
-    const secs = seconds % 60;
+    const minutes = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
     
-    if (hours > 0) {
-        return `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-    }
     return `${minutes}:${secs.toString().padStart(2, '0')}`;
 }
-
 function getInitials(name) {
     if (!name) return 'U';
     const words = name.split(' ');
@@ -394,7 +366,6 @@ function showErrorState(message) {
         </div>
     `;
     
-    // Add click handler for retry button
     const retryBtn = videoResults.querySelector('.retry-btn');
     if (retryBtn) {
         retryBtn.addEventListener('click', init);
@@ -403,11 +374,10 @@ function showErrorState(message) {
     loadMoreBtn.style.display = 'none';
 }
 
-// Initialize app when DOM is ready
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
 } else {
     init();
 }
 
-})(); // End of IIFE
+})(); 

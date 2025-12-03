@@ -1,4 +1,3 @@
-// Your Firebase Configuration
 const firebaseConfig = {
   apiKey: "AIzaSyAcSDfF6Q1znMUZcctzcIh49GwrlkdJEqo",
   authDomain: "nodejsxfirebase-6dc04.firebaseapp.com",
@@ -9,11 +8,9 @@ const firebaseConfig = {
   measurementId: "G-B1MHFC9JVL",
 };
 
-// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 
-// Auth State Observer
 auth.onAuthStateChanged((user) => {
   console.log(
     "Auth state changed:",
@@ -34,7 +31,6 @@ auth.onAuthStateChanged((user) => {
   }
 });
 
-// Sign In with Google
 async function signInWithGoogle() {
   const provider = new firebase.auth.GoogleAuthProvider();
   try {
@@ -76,9 +72,8 @@ async function sendVerification() {
       return;
     }
 
-    // Action code settings for email verification
     const actionCodeSettings = {
-      url: window.location.href, // Redirect back to this page
+      url: window.location.href, 
       handleCodeInApp: true,
     };
 
@@ -116,12 +111,10 @@ function showUserProfile(user) {
     : '<span class="badge badge-warning">Not Verified</span>';
   document.getElementById("emailVerified").innerHTML = verifiedBadge;
 
-  // Show/hide verification button
   document.getElementById("verifyBtn").style.display = user.emailVerified
     ? "none"
     : "block";
 
-  // Dates
   if (user.metadata.creationTime) {
     document.getElementById("accountCreated").textContent = new Date(
       user.metadata.creationTime

@@ -1,6 +1,5 @@
 "use strict";
 function updateNavbar() {
-  // Find the right-side container with navigation and actions
   const navContainer = document.querySelector('header .flex.items-center.gap-2.md\\:gap-6');
   
   if (!navContainer) {
@@ -8,7 +7,6 @@ function updateNavbar() {
     return;
   }
   
-  // Find or create the auth section (last item in the container)
   let authSection = navContainer.querySelector('#navbar-auth-section');
   
   if (!authSection) {
@@ -26,25 +24,18 @@ function updateNavbar() {
   }
   
   if (AUTH && AUTH.isLoggedIn()) {
-    // User is logged in - show profile dropdown
     
-    // ✅ FIXED: Get user data from localStorage directly
 const user = JSON.parse(localStorage.getItem('user') || '{}');
 const profile = JSON.parse(localStorage.getItem('profile') || '{}');
 const userProfile = JSON.parse(localStorage.getItem('userProfile') || '{}');
-// Merge all possible sources of user data
 const displayName = userProfile.full_name || user.full_name || user.name || user.username || profile.username || profile.name || 'User';
 const displayEmail = user.email || profile.email || '';
-// Build profile image URL - prioritize userProfile (from profile.js upload)
 let displayPhoto;
 if (userProfile.profile_image) {
-  // User has uploaded a profile image - use API endpoint
   displayPhoto = `https://vstad-api.cheatdev.online/api/profile/profile-image/${userProfile.profile_image}`;
 } else if (user.profile_image) {
-  // Fallback to user.profile_image from auth
   displayPhoto = `https://vstad-api.cheatdev.online/api/profile/profile-image/${user.profile_image}`;
 } else {
-  // Final fallback to generated avatar
   displayPhoto = user.photo || profile.avatar || profile.photo || `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=1e40af&color=fff`;
 }
     authSection.className = 'relative';
@@ -102,7 +93,6 @@ if (userProfile.profile_image) {
       </div>
     `;
   } else {
-    // User not logged in - show sign in button
     authSection.className = '';
     authSection.innerHTML = `
       <a href="/pages/sign_in.html" class="inline-flex items-center justify-center h-9 px-4 py-2 text-sm font-medium text-red-600 dark:text-red-400 bg-white dark:bg-transparent border border-red-500/50 dark:border-red-500 hover:bg-red-50 dark:hover:bg-red-950/30 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-red-500/20 shadow-sm">
@@ -111,22 +101,17 @@ if (userProfile.profile_image) {
     `;
   }
   
-  // ✅ CRITICAL: Reinitialize mobile features after auth section changes
   reinitializeMobileFeatures();
 }
 
-// NEW: Setup mobile search dropdown
 function setupMobileSearch() {
   console.log(' Setting up mobile search...');
   
-  // Find the mobile search button - look for the button with search icon
   const allButtons = document.querySelectorAll('header button');
   let mobileSearchButton = null;
   
   allButtons.forEach(btn => {
-    // Check if button has search icon (circle element)
     const hasSearchIcon = btn.querySelector('svg circle[cx="11"]');
-    // Check if it's NOT the theme toggle button
     const isNotThemeToggle = !btn.id || btn.id !== 'theme-toggle';
     
     if (hasSearchIcon && isNotThemeToggle) {
@@ -179,19 +164,16 @@ function setupMobileSearch() {
     }
   }
   
-  // Remove old event listeners by cloning elements
   const mobileSearchInput = document.getElementById('mobile-search-input');
   const mobileSearchBtn = document.getElementById('mobile-search-btn');
   
   if (mobileSearchInput && mobileSearchBtn) {
-    // Clone to remove all event listeners
     const newSearchBtn = mobileSearchBtn.cloneNode(true);
     mobileSearchBtn.parentNode.replaceChild(newSearchBtn, mobileSearchBtn);
     
     const newSearchInput = mobileSearchInput.cloneNode(true);
     mobileSearchInput.parentNode.replaceChild(newSearchInput, mobileSearchInput);
     
-    // Function to sync mobile and desktop search
     function syncSearchAndPerform() {
       const mobileInput = document.getElementById('mobile-search-input');
       const mobileValue = mobileInput?.value.trim();
@@ -210,7 +192,6 @@ function setupMobileSearch() {
       }
     }
     
-    // Add fresh event listeners
     newSearchBtn.addEventListener('click', syncSearchAndPerform);
     
     newSearchInput.addEventListener('keypress', (e) => {
@@ -234,7 +215,6 @@ function setupMobileSearch() {
     });
   }
   
-  // Set click handler
   mobileSearchButton.onclick = (e) => {
     e.stopPropagation();
     console.log(' Search button clicked!');
@@ -244,7 +224,6 @@ function setupMobileSearch() {
   console.log('✅ Mobile search setup complete');
 }
 
-// NEW: Setup mobile menu (hamburger)
 function setupMobileMenu() {
   const navContainer = document.querySelector('header .flex.items-center.gap-2.md\\:gap-6');
   if (!navContainer) return;
@@ -306,14 +285,12 @@ function setupMobileMenu() {
   };
 }
 
-// NEW: Reorder navbar for mobile
 function reorderNavbarForMobile() {
   const navContainer = document.querySelector('header .flex.items-center.gap-2.md\\:gap-6');
   if (!navContainer) return;
   
   const desktopNav = navContainer.querySelector('nav.hidden.md\\:flex');
   
-  // Find search button more reliably
   const allButtons = navContainer.querySelectorAll('button');
   let searchButton = null;
   allButtons.forEach(btn => {
@@ -330,7 +307,6 @@ function reorderNavbarForMobile() {
     const isMobile = window.innerWidth < 768;
     
     if (isMobile) {
-      // Mobile order: search → dark mode → mobile menu → auth
       if (desktopNav) desktopNav.style.display = 'none';
       if (searchButton) navContainer.appendChild(searchButton);
       if (darkModeButton) navContainer.appendChild(darkModeButton);
@@ -343,12 +319,10 @@ function reorderNavbarForMobile() {
   
   checkAndReorder();
   
-  // Remove old resize listener
   if (window._navbarResizeHandler) {
     window.removeEventListener('resize', window._navbarResizeHandler);
   }
   
-  // Add new resize listener
   let resizeTimeout;
   window._navbarResizeHandler = () => {
     clearTimeout(resizeTimeout);
@@ -358,7 +332,6 @@ function reorderNavbarForMobile() {
   window.addEventListener('resize', window._navbarResizeHandler);
 }
 
-// ✅ NEW: Function to reinitialize all mobile features
 function reinitializeMobileFeatures() {
   console.log('Reinitializing mobile features...');
   setupMobileSearch();
@@ -366,7 +339,6 @@ function reinitializeMobileFeatures() {
   reorderNavbarForMobile();
 }
 
-// NEW: Toggle mobile search
 function toggleMobileSearch() {
   console.log('toggleMobileSearch called');
   const dropdown = document.getElementById('mobile-search-dropdown');
@@ -394,7 +366,6 @@ function toggleMobileSearch() {
   }
 }
 
-// NEW: Toggle mobile menu
 function toggleMobileMenu() {
   const dropdown = document.getElementById('mobile-menu-dropdown');
   const searchDropdown = document.getElementById('mobile-search-dropdown');
@@ -410,7 +381,6 @@ function toggleMobileMenu() {
   toggleMenuIcon(!isHidden);
 }
 
-// Toggle hamburger/close icon
 function toggleMenuIcon(isOpen) {
   const hamburgerIcon = document.getElementById('hamburger-icon');
   const closeIcon = document.getElementById('close-icon');
@@ -426,7 +396,6 @@ function toggleMenuIcon(isOpen) {
   }
 }
 
-// Toggle profile dropdown menu
 function toggleProfileMenu() {
   const dropdown = document.getElementById('profile-dropdown');
   if (dropdown) {
@@ -434,7 +403,6 @@ function toggleProfileMenu() {
   }
 }
 
-// Close dropdown when clicking outside
 document.addEventListener('click', (event) => {
   const profileButton = document.getElementById('profile-menu-button');
   const dropdown = document.getElementById('profile-dropdown');
@@ -445,7 +413,6 @@ document.addEventListener('click', (event) => {
     }
   }
   
-  // NEW: Close mobile search
   const allButtons = document.querySelectorAll('header button');
   let mobileSearchButton = null;
   allButtons.forEach(btn => {
@@ -462,7 +429,6 @@ document.addEventListener('click', (event) => {
     }
   }
   
-  // NEW: Close mobile menu
   const mobileMenuButton = document.getElementById('mobile-menu-button');
   const mobileMenuDropdown = document.getElementById('mobile-menu-dropdown');
   
@@ -474,33 +440,27 @@ document.addEventListener('click', (event) => {
   }
 });
 
-// Handle logout
 function handleLogout() {
   if (confirm('Are you sure you want to logout?')) {
     if (AUTH && typeof AUTH.logout === 'function') {
       AUTH.logout('/pages/home.html');
     } else {
-      // Fallback if AUTH is not available
       localStorage.clear();
       window.location.href = '/pages/home.html';
     }
   }
 }
 
-// Update navbar when page loads
 document.addEventListener('DOMContentLoaded', updateNavbar);
 
-// Also run after a delay to catch any late updates from auth.js
 setTimeout(updateNavbar, 500);
 
-// Listen for storage changes (when user logs in/out in another tab)
 window.addEventListener('storage', (e) => {
   if (e.key === 'authToken' || e.key === 'access_token') {
     updateNavbar();
   }
 });
 
-// Export for use in other scripts
 window.updateNavbar = updateNavbar;
 window.reinitializeMobileFeatures = reinitializeMobileFeatures;
 window.handleLogout = handleLogout;

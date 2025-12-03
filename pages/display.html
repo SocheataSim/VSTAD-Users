@@ -36,6 +36,7 @@
             }
         }
     </script>
+
 </head>
 
 <body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
@@ -45,7 +46,7 @@
         <div class="container mx-auto px-4 md:px-6 h-16 flex items-center justify-between gap-4">
 
             <!-- Left: Logo -->
-            <a href="#" class="flex items-center gap-2 flex-shrink-0">
+            <a href="about_us.html" class="flex items-center gap-2 flex-shrink-0">
                 <!-- Logo Icon -->
                 <div
                     class="relative w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-blue-800 overflow-hidden shrink-0">
@@ -112,7 +113,6 @@
                         <path d="m19.07 4.93-1.41 1.41" />
                     </svg>
 
-                    <!-- Moon Icon (Show in Light Mode) -->
                     <svg id="moon-icon" class="w-5 h-5 block dark:hidden" xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -120,20 +120,14 @@
                     </svg>
                 </button>
 
-                <!-- Sign In Button -->
-                <!-- <a href="sign_in.html"
-                    class="inline-flex items-center justify-center h-9 px-4 py-2 text-sm font-medium text-red-600 dark:text-red-400 bg-white dark:bg-transparent border border-red-500/50 dark:border-red-500 hover:bg-red-50 dark:hover:bg-red-950/30 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-red-500/20 shadow-sm">
-                    Sign in
-                </a> -->
+               
             </div>
         </div>
     </header>
     <!-- Main Content -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <!-- Video Section -->
             <div class="lg:col-span-2">
-                <!-- Video Player -->
                 <div class="bg-black rounded-lg overflow-hidden mb-4">
                     <div class="video-container">
                         <video id="videoPlayer" controls class="w-full h-[500px]">
@@ -142,14 +136,12 @@
                     </div>
                 </div>
 
-                <!-- Video Info -->
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-6 mb-4">
                     <h1 id="videoTitle" class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Closing Ceremony
                     </h1>
                     <p id="videoView" class="text-gray-600 dark:text-gray-400 mb-4">31k views · 10 Days ago</p>
 
 
-                    <!-- Channel Info -->
                     <div class="flex items-center justify-between mb-4">
                         <div class="flex items-center space-x-3">
                             <div class="w-12 h-12 rounded-full flex items-center justify-center object-cover"
@@ -166,7 +158,6 @@
                         of student at ISTAD</p>
 
 
-                    <!-- Action Buttons -->
                     <div class="flex flex-wrap gap-3">
                         <button id="likeBtn"
                             class="flex items-center space-x-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600">
@@ -210,43 +201,18 @@
                     </div>
                 </div>
 
-                <!-- Comments Section -->
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-6">
                     <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Comments</h2>
 
-                    <!-- Comments List -->
                     <div id="commentsList" class="space-y-4 mb-6">
                         
                     </div>
-
-                    <!-- Add Comment -->
-                    <!-- <div class="flex space-x-3">
-                        <div id="profileContainer"
-                            class="w-12 h-12 rounded-full overflow-hidden flex items-center justify-center">
-                            <img src="${profile_image}"
-                                alt="profile Image">
-                        </div>
-                        <div id="commentsList"></div>
-                        <div class="flex-1">
-                            <input type="text" id="commentInput" placeholder="Write a comment..."
-                                class="w-full px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 dark:text-white">
-                            <button id="postCommentBtn"
-                                class="mt-2 right-2 px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 flex items-center space-x-2">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
-                                </svg>
-                                <span>Post</span>
-                            </button>
-                        </div>
-                    </div> -->
-
                     <!-- Add Comment -->
                     <div class="flex space-x-3">
                         <div id="profileContainer"
                             class="w-12 h-12 rounded-full overflow-hidden flex items-center justify-center">
                             <img id="commentProfileImage" 
-                                src="../../pages/images/Vstad.jpg"
+                                src="../asset/Sokkhim.jpg"
                                 alt="Profile Image"
                                 class="w-full h-full object-cover">
                         </div>
@@ -282,7 +248,6 @@
         <div class="max-w-7xl mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
 
-                <!-- Logo & Description -->
                 <div class="flex flex-col items-center text-center">
                     <div class="w-24 h-24 flex items-center justify-center mb-4 ">
                         <img src="../asset/logo copy.png" alt=""
@@ -294,7 +259,6 @@
                     </p>
                 </div>
 
-                <!-- Quick Links -->
                 <div>
                     <h3 class="font-semibold text-lg mb-4 pb-2">Quick Links</h3>
                     <ul class="space-y-2">
@@ -309,9 +273,9 @@
                 <div>
                     <h3 class="font-semibold text-lg mb-4 pb-2">About</h3>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-200 hover:text-yellow-400 transition-colors">About us</a></li>
-                        <li><a href="#" class="text-gray-200 hover:text-yellow-400 transition-colors">Our Teams</a></li>
-                        <li><a href="#" class="text-gray-200 hover:text-yellow-400 transition-colors">Contact Us</a>
+                        <li><a href="about_us.html" class="text-gray-200 hover:text-yellow-400 transition-colors">About us</a></li>
+                        <li><a href="about_us.html#ourteam" class="text-gray-200 hover:text-yellow-400 transition-colors">Our Teams</a></li>
+                        <li><a href="about_us.html#contact-us" class="text-gray-200 hover:text-yellow-400 transition-colors">Contact Us</a>
                         </li>
                     </ul>
                 </div>
@@ -340,7 +304,6 @@
 
             </div>
 
-            <!-- Bottom Bar -->
             <div
                 class="mt-10 pt-6 border-t border-white/20 flex flex-col md:flex-row justify-between items-center gap-4">
                 <p class="text-sm text-gray-300">
@@ -384,7 +347,6 @@
             of student at ISTAD</p>
 
 
-        <!-- Action Buttons -->
         <div class="flex flex-wrap gap-3">
             <button id="likeBtn"
                 class="flex items-center space-x-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600">
@@ -433,12 +395,9 @@
         <div class="bg-white dark:bg-gray-800 rounded-lg p-6">
             <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Comments</h2>
 
-            <!-- Comments List -->
             <div id="commentsList" class="space-y-4 mb-6">
-                <!-- Comments will be dynamically loaded here -->
             </div>
 
-            <!-- Add Comment -->
             <div class="flex space-x-3">
                 <div id="profileContainer"
                     class="w-12 h-12 rounded-full overflow-hidden flex items-center justify-center">
@@ -462,7 +421,6 @@
         </div>
         </div>
 
-        <!-- Sidebar - More Videos -->
         <div class="lg:col-span-1">
             <div class="bg-white dark:bg-gray-800 rounded-lg p-4 sticky top-20">
                 <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">More Video</h2>
@@ -478,7 +436,6 @@
             <div class="max-w-7xl mx-auto">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
 
-                    <!-- Logo & Description -->
                     <div class="flex flex-col items-center text-center">
                         <div class="w-24 h-24 flex items-center justify-center mb-4 ">
                             <img src="../asset/logo copy.png" alt=""
@@ -490,7 +447,6 @@
                         </p>
                     </div>
 
-                    <!-- Quick Links -->
                     <div>
                         <h3 class="font-semibold text-lg mb-4 pb-2">Quick Links</h3>
                         <ul class="space-y-2">
@@ -502,20 +458,18 @@
                         </ul>
                     </div>
 
-                    <!-- About -->
                     <div>
                         <h3 class="font-semibold text-lg mb-4 pb-2">About</h3>
                         <ul class="space-y-2">
-                            <li><a href="#" class="text-gray-200 hover:text-yellow-400 transition-colors">About us</a>
+                            <li><a href="about_us.html" class="text-gray-200 hover:text-yellow-400 transition-colors">About us</a>
                             </li>
-                            <li><a href="#" class="text-gray-200 hover:text-yellow-400 transition-colors">Our Teams</a>
+                            <li><a href="about_us.html#ourteam" class="text-gray-200 hover:text-yellow-400 transition-colors">Our Teams</a>
                             </li>
-                            <li><a href="#" class="text-gray-200 hover:text-yellow-400 transition-colors">Contact Us</a>
+                            <li><a href="about_us.html#contact-us" class="text-gray-200 hover:text-yellow-400 transition-colors">Contact Us</a>
                             </li>
                         </ul>
                     </div>
 
-                    <!-- Contact Us -->
                     <div>
                         <h3 class="font-semibold text-lg mb-4  pb-2">Contact Us</h3>
                         <ul class="space-y-2 text-sm text-gray-200">
@@ -529,7 +483,6 @@
                         </ul>
                     </div>
 
-                    <!-- Sponsor and Organize -->
                     <div class="flex flex-col items-center">
                         <h3 class="font-semibold text-md mb-4 pb-2 w-full text-center">Sponsored and Organized by</h3>
                         <div class="flex items-center gap-2 rounded-lg px-4 py-2">
@@ -539,14 +492,12 @@
 
                 </div>
 
-                <!-- Bottom Bar -->
                 <div
                     class="mt-10 pt-6 border-t border-white/20 flex flex-col md:flex-row justify-between items-center gap-4">
                     <p class="text-sm text-gray-300">
                         © 2025 VSTAD. All rights reserved.
                     </p>
 
-                    <!-- Social Media Icons -->
                     <div class="flex items-center gap-4">
                         <a href="#"
                             class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-yellow-400 hover:text-blue-900 transition-colors">

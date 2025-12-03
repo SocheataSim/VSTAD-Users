@@ -28,10 +28,9 @@
         }
     </script>
     <style>
-        /* Thumbnail Aspect Ratio */
         .thumbnail-wrapper {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            padding-bottom: 56.25%; 
             overflow: hidden;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border-radius: 12px;
@@ -46,7 +45,6 @@
             transition: transform 0.2s ease;
         }
 
-        /* Duration Badge */
         .duration-badge {
             position: absolute;
             bottom: 8px;
@@ -59,7 +57,6 @@
             font-weight: 600;
         }
 
-        /* Profile Image Circle */
         .profile-circle {
             width: 36px;
             height: 36px;
@@ -80,7 +77,6 @@
             object-fit: cover;
         }
 
-        /* Line Clamp */
         .line-clamp-2 {
             display: -webkit-box;
             -webkit-line-clamp: 2;
@@ -88,7 +84,6 @@
             overflow: hidden;
         }
 
-        /* Skeleton Loading Animation */
         .skeleton {
             animation: skeleton-loading 1s linear infinite alternate;
         }
@@ -97,12 +92,10 @@
             100% { background-color: rgba(156, 163, 175, 0.4); }
         }
         
-        /* Hover Effects */
         .video-card:hover .thumbnail-wrapper img {
             transform: scale(1.05);
         }
 
-        /* Playlist Button Styles */
         .playlist-btn {
             transition: all 0.3s ease;
         }
@@ -111,13 +104,10 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
         .playlist-btn.active {
-            /* background: linear-gradient(135deg, #253C95  0%, #667eea  100%); */
             background: #253C95;
             color: white;
-            /* box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4); */
         }
 
-        /* Custom Scrollbar for Playlist Container */
         .playlist-scroll::-webkit-scrollbar {
             height: 6px;
         }
@@ -136,18 +126,16 @@
 <body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
 
     <!-- Header -->
-    <header class="sticky top-0 z-50 w-full border-b border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-gray-950/80 backdrop-blur-md supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-gray-950/60">
+   <header class="sticky top-0 z-50 w-full border-b border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-gray-950/80 backdrop-blur-md supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-gray-950/60">
         <div class="container mx-auto px-4 md:px-6 h-16 flex items-center justify-between gap-4">
             
-            <!-- Left: Logo -->
-            <a href="#" class="flex items-center gap-2 flex-shrink-0">
+            <a href="about_us.html" class="flex items-center gap-2 flex-shrink-0">
                 <div class="relative w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-blue-800 overflow-hidden shrink-0">
-                    <img src="../asset/logo copy.png" alt="">
+                        <img src="../asset/logo copy.png" alt="">
                 </div>
                 <span class="text-xl font-bold tracking-tight text-gray-900 dark:text-white hidden sm:block">VSTAD</span>
             </a>
 
-            <!-- Center: Search Bar -->
             <div class="hidden md:flex flex-1 max-w-md mx-4">
                 <div class="relative w-full">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">
@@ -162,34 +150,27 @@
                 </div>
             </div>
 
-            <!-- Right: Navigation & Actions -->
             <div class="flex items-center gap-2 md:gap-6">
-                <!-- Nav Links (Desktop) -->
                 <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
-                    <a href="./home.html" class="text-gray-700 hover:text-primary-color dark:text-gray-300 dark:hover:text-blue-400 transition-colors">Home</a>
-                    <a href="./playlist.html" class="text-primary-color dark:text-blue-400 font-semibold transition-colors">Explore</a>
+                    <a href="./home.html" class="text-primary-color dark:text-blue-400 font-semibold transition-colors">Home</a>
+                    <a href="./playlist.html" class="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors">Explore</a>
                 </nav>
 
-                <!-- Mobile Search Toggle -->
                 <button class="md:hidden p-2 text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800 rounded-full transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
                     <span class="sr-only">Search</span>
                 </button>
 
-                <!-- Theme Toggle -->
                 <button 
                     id="theme-toggle"
                     class="p-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700"
                     aria-label="Toggle Dark Mode"
                 >
                     <svg id="sun-icon" class="w-5 h-5 hidden dark:block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+                    
                     <svg id="moon-icon" class="w-5 h-5 block dark:hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
                 </button>
 
-                <!-- Sign In Button -->
-                <a href="sign_in.html" class="inline-flex items-center justify-center h-9 px-4 py-2 text-sm font-medium text-red-600 dark:text-red-400 bg-white dark:bg-transparent border border-red-500/50 dark:border-red-500 hover:bg-red-50 dark:hover:bg-red-950/30 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-red-500/20 shadow-sm">
-                    Sign in
-                </a>
             </div>
         </div>
     </header>
@@ -197,12 +178,10 @@
     <!-- Main Content -->
     <main class="container mx-auto px-4 py-8">
         
-        <!-- Playlist Filter Section -->
         <div class="mb-8">
             <div class="flex items-center justify-between mb-4">
                 <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">Explore Playlists</h1>
                 
-                <!-- Year Filter Dropdown -->
                 <div class="relative">
                     <label for="year-filter" class="sr-only">Filter by Year</label>
                     <select 
@@ -224,7 +203,6 @@
                 </div>
             </div>
 
-            <!-- Playlist Buttons (Horizontal Scroll) -->
             <div class="playlist-scroll overflow-x-auto pb-2">
                 <div class="flex gap-3 min-w-max">
                     <button class="playlist-btn active px-6 py-3 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-medium whitespace-nowrap" data-playlist="all">
@@ -264,9 +242,7 @@
                 <span id="video-count" class="text-sm text-gray-600 dark:text-gray-400">0 videos</span>
             </div>
             
-            <!-- Video Grid (You'll populate this with your API) -->
             <div id="video-results" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                <!-- Example Video Card Structure (Remove this when integrating API) -->
                 <div class="video-card group cursor-pointer">
                     <div class="thumbnail-wrapper mb-3">
                         <img src="https://via.placeholder.com/640x360" alt="Video Thumbnail" class="w-full h-full object-cover">
@@ -285,12 +261,10 @@
                         </div>
                     </div>
                 </div>
-                <!-- Repeat cards as needed -->
             </div>
 
-            <!-- Load More Button -->
             <div class="flex justify-center mt-8">
-                <button id="loadMoreBtn" class="px-8 py-3 bg-red-600 text-white rounded-full hover:bg-red-700 transition-all font-semibold shadow-lg hover:shadow-xl transform hover:scale-105">
+                <button id="loadMoreBtn" class="px-8 py-3 bg-red-600 text-white rounded-full hover:bg-red-700 transition-all font-semibold hover:shadow-xl transform hover:scale-105">
                     Load More Videos
                 </button>
             </div>
@@ -325,9 +299,9 @@
                 <div>
                     <h3 class="font-semibold text-lg mb-4 pb-2">About</h3>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-200 hover:text-yellow-400 transition-colors">About us</a></li>
-                        <li><a href="#" class="text-gray-200 hover:text-yellow-400 transition-colors">Our Teams</a></li>
-                        <li><a href="#" class="text-gray-200 hover:text-yellow-400 transition-colors">Contact Us</a></li>
+                        <li><a href="about_us.html" class="text-gray-200 hover:text-yellow-400 transition-colors">About us</a></li>
+                        <li><a href="about_us.html#ourteam" class="text-gray-200 hover:text-yellow-400 transition-colors">Our Teams</a></li>
+                        <li><a href="about_us.html#contact-us" class="text-gray-200 hover:text-yellow-400 transition-colors">Contact Us</a></li>
                     </ul>
                 </div>
 
@@ -379,11 +353,9 @@
     </footer>
 
     <script>
-        // Theme Toggle Functionality
         const themeToggle = document.getElementById('theme-toggle');
         const html = document.documentElement;
 
-        // Check for saved theme preference or default to 'light'
         const currentTheme = localStorage.getItem('theme') || 'light';
         html.classList.toggle('dark', currentTheme === 'dark');
 
@@ -393,52 +365,41 @@
             localStorage.setItem('theme', theme);
         });
 
-        // Playlist Button Click Handler
         const playlistButtons = document.querySelectorAll('.playlist-btn');
         const playlistTitle = document.getElementById('playlist-title');
 
         playlistButtons.forEach(button => {
             button.addEventListener('click', () => {
-                // Remove active class from all buttons
                 playlistButtons.forEach(btn => btn.classList.remove('active'));
                 
-                // Add active class to clicked button
                 button.classList.add('active');
                 
-                // Update title
                 const playlistName = button.textContent.trim();
                 playlistTitle.textContent = playlistName;
                 
-                // Get playlist data attribute
                 const playlistId = button.dataset.playlist;
                 console.log('Selected playlist:', playlistId);
                 
-                // TODO: Call your API here with playlistId
-                // Example: fetchVideosByPlaylist(playlistId);
             });
         });
 
-        // Year Filter Change Handler
         const yearFilter = document.getElementById('year-filter');
         
         yearFilter.addEventListener('change', (e) => {
             const selectedYear = e.target.value;
             console.log('Selected year:', selectedYear);
-            
-            // TODO: Call your API here with selectedYear filter
-            // Example: fetchVideosByYear(selectedYear);
         });
 
-        // Load More Button
         const loadMoreBtn = document.getElementById('loadMoreBtn');
         
         loadMoreBtn.addEventListener('click', () => {
             console.log('Load more videos clicked');
-            
-            // TODO: Call your API to load more videos
-            // Example: loadMoreVideos();
+        
         });
     </script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/navbar.js"></script>
+    <script src="../js/index.js"></script>
   <script src="../js/playlist.js"></script>
   <script src="../js/darkmode.js"></script>
 </body>
