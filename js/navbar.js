@@ -23,75 +23,81 @@ function updateNavbar() {
     }
   }
   
-  if (AUTH && AUTH.isLoggedIn()) {
+ if (AUTH && AUTH.isLoggedIn()) {
     
-const user = JSON.parse(localStorage.getItem('user') || '{}');
-const profile = JSON.parse(localStorage.getItem('profile') || '{}');
-const userProfile = JSON.parse(localStorage.getItem('userProfile') || '{}');
-const displayName = userProfile.full_name || user.full_name || user.name || user.username || profile.username || profile.name || 'User';
-const displayEmail = user.email || profile.email || '';
-let displayPhoto;
-if (userProfile.profile_image) {
-  displayPhoto = `https://vstad-api.cheatdev.online/api/profile/profile-image/${userProfile.profile_image}`;
-} else if (user.profile_image) {
-  displayPhoto = `https://vstad-api.cheatdev.online/api/profile/profile-image/${user.profile_image}`;
-} else {
-  displayPhoto = user.photo || profile.avatar || profile.photo || `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=1e40af&color=fff`;
-}
-    authSection.className = 'relative';
-    authSection.innerHTML = `
-      <!-- Profile Button -->
-      <button 
-        id="profile-menu-button"
-        onclick="toggleProfileMenu()"
-        class="inline-flex items-center justify-center gap-2 h-9 px-4 py-2 text-sm font-medium dark:text-white text-black  bg-white dark:bg-transparent rounded-md transition-colors focus:outline-none focus:ring-2"
-      >
-        <img 
-          src="${displayPhoto}" 
-          alt="${displayName}" 
-          class="w-6 h-6 rounded-full object-cover border-2"
-          onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=1e40af&color=fff'"
-        >
-        <span class="hidden md:block">${displayName.split(' ')[0]}</span>
-        <svg class="w-4 h-4 hidden md:block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="m6 9 6 6 6-6"/>
-        </svg>
-      </button>
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
+  const profile = JSON.parse(localStorage.getItem('profile') || '{}');
+  const userProfile = JSON.parse(localStorage.getItem('userProfile') || '{}');
+  const displayName = userProfile.full_name || user.full_name || user.name || user.username || profile.username || profile.name || 'User';
+  const displayEmail = user.email || profile.email || '';
 
-      <!-- Dropdown Menu -->
-      <div 
-        id="profile-dropdown"
-        class="hidden absolute right-0 mt-2 w-56 bg-white dark:text-white dark:bg-gray-900 rounded-lg shadow-lg text-black py-1 z-50"
-      >
-        <!-- User Info -->
-        <div class="px-4 py-3 dark:border-gray-800">
-          <p class="text-sm font-medium text-gray-900 dark:text-white">${displayName}</p>
-          <p class="text-xs text-gray-500 dark:text-gray-400 truncate">${displayEmail}</p>
-        </div>
+  // ADD THIS LINE - Detect current location
+  const currentPath = window.location.pathname;
+  const isInPagesFolder = currentPath.includes('/pages/');
+  const profileLink = isInPagesFolder ? './user_profile/profile.html' : './pages/user_profile/profile.html';
 
-        <!-- Menu Items -->
-        <a href="/pages/user_profile/profile.html" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-          <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
-            <circle cx="12" cy="7" r="4"/>
-          </svg>
-          Your Profile
-        </a>
-        <div class="border-t border-gray-200 dark:border-gray-800 my-1"></div>
-
+  let displayPhoto;
+  if (userProfile.profile_image) {
+    displayPhoto = `https://vstad-api.cheatdev.online/api/profile/profile-image/${userProfile.profile_image}`;
+  } else if (user.profile_image) {
+    displayPhoto = `https://vstad-api.cheatdev.online/api/profile/profile-image/${user.profile_image}`;
+  } else {
+    displayPhoto = user.photo || profile.avatar || profile.photo || `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=1e40af&color=fff`;
+  }
+      authSection.className = 'relative';
+      authSection.innerHTML = `
+        <!-- Profile Button -->
         <button 
-          onclick="handleLogout()"
-          class="flex items-center gap-2 w-full px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 transition-colors text-left"
+          id="profile-menu-button"
+          onclick="toggleProfileMenu()"
+          class="inline-flex items-center justify-center gap-2 h-9 px-4 py-2 text-sm font-medium dark:text-white text-black  bg-white dark:bg-transparent rounded-md transition-colors focus:outline-none focus:ring-2"
         >
-          <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 4 0 0 1 2-2h4"/>
-            <polyline points="16 17 21 12 16 7"/>
-            <line x1="21" y1="12" x2="9" y2="12"/>
+          <img 
+            src="${displayPhoto}" 
+            alt="${displayName}" 
+            class="w-6 h-6 rounded-full object-cover border-2"
+            onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=1e40af&color=fff'"
+          >
+          <span class="hidden md:block">${displayName.split(' ')[0]}</span>
+          <svg class="w-4 h-4 hidden md:block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6"/>
           </svg>
-          Logout
         </button>
-      </div>
-    `;
+
+        <!-- Dropdown Menu -->
+        <div 
+          id="profile-dropdown"
+          class="hidden absolute right-0 mt-2 w-56 bg-white dark:text-white dark:bg-gray-900 rounded-lg shadow-lg text-black py-1 z-50"
+        >
+          <!-- User Info -->
+          <div class="px-4 py-3 dark:border-gray-800">
+            <p class="text-sm font-medium text-gray-900 dark:text-white">${displayName}</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400 truncate">${displayEmail}</p>
+          </div>
+
+          <!-- Menu Items -->
+          <a href="${profileLink}" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+            Your Profile
+          </a>
+          <div class="border-t border-gray-200 dark:border-gray-800 my-1"></div>
+
+          <button 
+            onclick="handleLogout()"
+            class="flex items-center gap-2 w-full px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 transition-colors text-left"
+          >
+            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 4 0 0 1 2-2h4"/>
+              <polyline points="16 17 21 12 16 7"/>
+              <line x1="21" y1="12" x2="9" y2="12"/>
+            </svg>
+            Logout
+          </button>
+        </div>
+      `;
   } else {
     authSection.className = '';
     authSection.innerHTML = `
