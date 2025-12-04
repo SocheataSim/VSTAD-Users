@@ -15,7 +15,7 @@ function updateNavbar() {
     authSection.id = 'navbar-auth-section';
     
     // Find the "Sign in" button and replace it
-    const signInButton = navContainer.querySelector('a[href="/pages/sign_in.html"]');
+    const signInButton = navContainer.querySelector('a[href="../pages/sign_in.html"]');
     if (signInButton) {
       signInButton.replaceWith(authSection);
     } else {
@@ -95,7 +95,7 @@ if (userProfile.profile_image) {
   } else {
     authSection.className = '';
     authSection.innerHTML = `
-      <a href="/pages/sign_in.html" class="inline-flex items-center justify-center h-9 px-4 py-2 text-sm font-medium text-red-600 dark:text-red-400 bg-white dark:bg-transparent border border-red-500/50 dark:border-red-500 hover:bg-red-50 dark:hover:bg-red-950/30 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-red-500/20 shadow-sm">
+      <a href="../pages/sign_in.html" class="inline-flex items-center justify-center h-9 px-4 py-2 text-sm font-medium text-red-600 dark:text-red-400 bg-white dark:bg-transparent border border-red-500/50 dark:border-red-500 hover:bg-red-50 dark:hover:bg-red-950/30 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-red-500/20 shadow-sm">
         Sign in
       </a>
     `;
@@ -261,17 +261,21 @@ function setupMobileMenu() {
     mobileMenuDropdown = document.createElement('div');
     mobileMenuDropdown.id = 'mobile-menu-dropdown';
     mobileMenuDropdown.className = 'hidden md:hidden absolute left-0 right-0 top-full bg-white dark:bg-gray-950 border-b border-gray-200 dark:border-gray-800 shadow-lg z-40';
+    const currentPath = window.location.pathname;
+    const isInPagesFolder = currentPath.includes('/pages/');
+    const homeLink = isInPagesFolder ? './home.html' : './pages/home.html';
+    const exploreLink = isInPagesFolder ? './playlist.html' : './pages/playlist.html';
+
     mobileMenuDropdown.innerHTML = `
       <nav class="container mx-auto px-4 py-4 flex flex-col gap-2">
-        <a href="./page/home.html" class="px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">
+        <a href="${homeLink}" class="px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">
           Home
         </a>
-        <a href="../page/playlist.html" class="px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">
+        <a href="${exploreLink}" class="px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">
           Explore
         </a>
       </nav>
     `;
-    
     const header = document.querySelector('header');
     if (header) {
       header.appendChild(mobileMenuDropdown);
@@ -443,10 +447,10 @@ document.addEventListener('click', (event) => {
 function handleLogout() {
   if (confirm('Are you sure you want to logout?')) {
     if (AUTH && typeof AUTH.logout === 'function') {
-      AUTH.logout('/pages/home.html');
+      AUTH.logout('../pages/home.html');
     } else {
       localStorage.clear();
-      window.location.href = '/pages/home.html';
+      window.location.href = '../pages/home.html';
     }
   }
 }
