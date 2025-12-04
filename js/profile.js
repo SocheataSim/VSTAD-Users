@@ -1,4 +1,3 @@
-
 //  CONFIG
 
 const BASE_URL = "https://vstad-api.cheatdev.online/api";
@@ -126,17 +125,20 @@ async function loadProfile() {
         console.log("💾 Loading profile from localStorage");
         
         const savedProfile = localStorage.getItem('userProfile');
+        const user = JSON.parse(localStorage.getItem('user') || '{}');
+        const profile = JSON.parse(localStorage.getItem('profile') || '{}');
+        
         let profileData;
         
         if (savedProfile) {
             profileData = JSON.parse(savedProfile);
             console.log("✅ Profile loaded from localStorage:", profileData);
         } else {
-            // Default mock data
+            // Default mock data with user/profile fallback
             profileData = {
-                full_name: "Lut Lina",
-                bio: "Content creator and video enthusiast",
-                profile_image: null 
+                full_name: user.full_name || user.name || user.username || profile.username || profile.name || "Lut Lina",
+                bio: user.bio || profile.bio || "Content creator and video enthusiast",
+                profile_image: user.profile_image || profile.profile_image || null 
             };
             console.log("⚠️ No saved profile. Using default data.");
         }
@@ -152,27 +154,46 @@ async function loadProfile() {
 
 // Helper function to update profile UI
 function updateProfileUI(profileData) {
+    // Get name for display and avatar generation
+    const displayName = profileData.full_name || "User";
+    
     // Update text fields
-    document.getElementById("profileName").textContent = profileData.full_name || "User";
+    document.getElementById("profileName").textContent = displayName;
     document.getElementById("profileBio").textContent = profileData.bio || "No bio";
     
-
+    // Generate profile image URL with dynamic avatar fallback
     let profileImageUrl;
     if (profileData.profile_image) {
         // Use the API endpoint to get the image
         profileImageUrl = `https://vstad-api.cheatdev.online/api/profile/profile-image/${profileData.profile_image}`;
     } else {
-        // Fallback to default image
-        profileImageUrl = "../../pages/images/Lina.jpg";
+        // Fallback to dynamic avatar with user initials
+        profileImageUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=1e40af&color=fff`;
     }
     
-    document.getElementById("profileImage").src = profileImageUrl;
-    document.getElementById("navProfileImage").src = profileImageUrl;
+    // Update all profile images with error fallback to dynamic avatar
+    const profileImage = document.getElementById("profileImage");
+    const navProfileImage = document.getElementById("navProfileImage");
+    const profilePreview = document.getElementById("profilePreview");
+    
+    profileImage.src = profileImageUrl;
+    profileImage.onerror = function() {
+        this.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=1e40af&color=fff`;
+    };
+    
+    navProfileImage.src = profileImageUrl;
+    navProfileImage.onerror = function() {
+        this.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=1e40af&color=fff`;
+    };
+    
+    profilePreview.src = profileImageUrl;
+    profilePreview.onerror = function() {
+        this.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=1e40af&color=fff`;
+    };
 
     // Modal fields
     document.getElementById("nameInput").value = profileData.full_name || "";
     document.getElementById("bioInput").value = profileData.bio || "";
-    document.getElementById("profilePreview").src = profileImageUrl;
 
     debugLog("Profile UI updated with:", profileData);
 }
@@ -251,12 +272,16 @@ function displayVideos(videos) {
 
     videoGrid.innerHTML = videos.map(video => {
         const thumbnailUrl = video.thumbnail_url; 
-          
+        
+        // Generate uploader name for avatar
+        const uploaderName = video.uploader?.username || video.uploader?.full_name || 'Unknown';
+        
         let uploaderImageUrl;
         if (video.uploader?.profile_image) {
             uploaderImageUrl = `https://vstad-api.cheatdev.online/api/profile/profile-image/${video.uploader.profile_image}`;
         } else {
-            uploaderImageUrl = '../../pages/images/Vstad.jpg';
+            // Use dynamic avatar with uploader's name
+            uploaderImageUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(uploaderName)}&background=1e40af&color=fff`;
         }
         
         const videoUrl = video.video_url || `video-detail.html?id=${video.id}`;
@@ -277,16 +302,16 @@ function displayVideos(videos) {
                 <div class="p-4">
                     <div class="flex items-start space-x-3">
                         <img src="${uploaderImageUrl}" 
-                             alt="${video.uploader?.username || 'User'}" 
+                             alt="${uploaderName}" 
                              class="w-12 h-12 rounded-full object-cover border-2 border-gray-200 dark:border-gray-700"
-                             onerror="this.src='../../pages/images/Vstad.jpg'">
+                             onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(uploaderName)}&background=1e40af&color=fff'">
                         
                         <div class="flex-1">
                             <h3 class="font-semibold text-gray-900 dark:text-white mb-1 line-clamp-2">
                                 ${video.title || 'Untitled Video'}
                             </h3>
                             <p class="text-sm text-gray-600 dark:text-gray-400">
-                                ${video.uploader?.username || video.uploader?.full_name || 'Unknown'}
+                                ${uploaderName}
                             </p>
                             <p class="text-sm text-gray-500 dark:text-gray-500">
                                 ${formatViews(video.view_count)} views • ${formatDate(video.created_at)}

@@ -50,7 +50,7 @@ function updateNavbar() {
         <button 
           id="profile-menu-button"
           onclick="toggleProfileMenu()"
-          class="inline-flex items-center justify-center gap-2 h-9 px-4 py-2 text-sm font-medium dark:text-white text-black  bg-white dark:bg-transparent rounded-md transition-colors focus:outline-none focus:ring-2"
+          class="inline-flex items-center justify-center gap-2 h-9 px-4 py-2 text-sm font-medium dark:text-white text-black dark:bg-transparent rounded-md transition-colors focus:outline-none focus:ring-2"
         >
           <img 
             src="${displayPhoto}" 
@@ -67,7 +67,7 @@ function updateNavbar() {
         <!-- Dropdown Menu -->
         <div 
           id="profile-dropdown"
-          class="hidden absolute right-0 mt-2 w-56 bg-white dark:text-white dark:bg-gray-900 rounded-lg shadow-lg text-black py-1 z-50"
+          class="hidden absolute right-0 mt-2 w-56 bg-white dark:text-white dark:bg-gray-900 rounded-lg text-black py-1 z-50"
         >
           <!-- User Info -->
           <div class="px-4 py-3 dark:border-gray-800">
